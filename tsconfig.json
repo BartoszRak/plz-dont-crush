@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -9,7 +10,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "noImplicitAny": true,
+    "paths": {
+      "@main/*": ["./src/*"]
+    },
   },
   "exclude": ["node_modules", "dist"]
 }
