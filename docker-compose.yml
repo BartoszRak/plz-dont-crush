@@ -1,0 +1,20 @@
+version: "3.8"
+
+networks:
+  plz-dont-crush:
+    driver: bridge
+services:
+  db:
+    container_name: postgres_container
+    image: "postgres:13.0-alpine"
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    env_file:
+      - "./.env"
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - plz-dont-crush

@@ -15,6 +15,5 @@
     "paths": {
       "@main/*": ["./src/*"]
     },
-  },
-  "exclude": ["node_modules", "dist"]
+  }
 }
