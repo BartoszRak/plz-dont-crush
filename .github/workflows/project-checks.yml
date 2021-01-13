@@ -1,0 +1,41 @@
+name: Project checks
+
+on:
+  push:
+    branches:
+      - '*'
+      - '**'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use nodejs 14.15.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.15.1'
+      - name: Install dependencies
+        run: yarn --prefer-offline
+      - name: Build app
+        run: yarn build
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-18.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use nodejs 14.15.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.15.1'
+      - name: Install dependencies
+        run: yarn --prefer-offline
+      - name: Unit tests
+        run: yarn test:cov
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1.0.11
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
