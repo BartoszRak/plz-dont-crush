@@ -762,6 +762,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/uid-generator@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/uid-generator/-/uid-generator-2.0.2.tgz#2c1354bfd1cd364454f0cd9787a2e075bff2e4d1"
+  integrity sha512-LGuG+Til8/kkJ3MOQ4ntqTogS6MQPqQf108UMf1WzJpvMsox0AFIaCbBS21G+7ueJZeXFIC4pzR8P9RHuNAVQQ==
+
 "@types/webpack-sources@*":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-2.1.0.tgz#8882b0bd62d1e0ce62f183d0d01b72e6e82e8c10"
@@ -6653,6 +6658,11 @@ typescript@^3.6.3, typescript@^3.6.4:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+
+uid-generator@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/uid-generator/-/uid-generator-2.0.0.tgz#70e7b882300a4ccd12841e5a857dacada7fd7452"
+  integrity sha512-XLRw2UyViQueSbd3dOHkswrg4gA4YuhibKzkFiPkilo6cdKEQqOX3K/Yu6Z2WXVMK+npfMNlSSufVSUifbXoOQ==
 
 union-value@^1.0.0:
   version "1.0.1"

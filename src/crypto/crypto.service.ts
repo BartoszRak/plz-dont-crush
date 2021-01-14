@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
+import * as UIDGenerator from 'uid-generator'
 
 @Injectable()
 export class CryptoService {
@@ -13,5 +14,10 @@ export class CryptoService {
     passwordHash: string,
   ): Promise<boolean> {
     return await bcrypt.compare(password, passwordHash)
+  }
+
+  async generateUid() {
+    const uidgen = new UIDGenerator(512)
+    return await uidgen.generate()
   }
 }

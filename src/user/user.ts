@@ -7,7 +7,10 @@ export class UserId extends TinyTypeOf<string>() {}
 export class UserEmail extends TinyTypeOf<string>() {}
 
 export class User {
-  protected constructor(public id: UserId, public email: UserEmail) {}
+  protected constructor(
+    public readonly id: UserId,
+    public readonly email: UserEmail,
+  ) {}
 
   toDto(): UserDto {
     return plainToClass(UserDto, {
