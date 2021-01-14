@@ -1,6 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as basicAuth from 'express-basic-auth'
+
 import { SwaggerConfigEnvs } from './swagger.config'
 
 export enum ApiTag {
