@@ -3,12 +3,12 @@ import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 
-import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { envsValidationSchema } from './config.envs'
 import { CryptoModule } from './crypto'
 import { databaseConfig, DatabaseConfig } from './database-config'
+import { HealthController } from './health.controller'
 import { SwapiModule } from './swapi'
 import { TokenModule } from './token'
 import { UserModule } from './user/user.module'
@@ -29,7 +29,7 @@ import { UserModule } from './user/user.module'
     UserModule,
     SwapiModule,
   ],
-  controllers: [AppController],
+  controllers: [HealthController],
   providers: [AppService],
 })
 export class AppModule {}

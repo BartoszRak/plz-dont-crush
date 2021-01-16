@@ -2,9 +2,9 @@ import { isDefined } from '@main/utils'
 import { IInferringQueryHandler, QueryHandler } from '@nestjs/cqrs'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { User } from '../domain/user'
-import { UserFactory } from '../domain/user.factory'
-import { UserEntity } from '../user.entity'
+import { User } from '../../domain/user'
+import { UserFactory } from '../../domain/user.factory'
+import { UserEntity } from '../../user.entity'
 import { GetUserByEmail } from './get-user-by-email.query'
 
 @QueryHandler(GetUserByEmail)

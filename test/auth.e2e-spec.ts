@@ -5,6 +5,7 @@ import { init } from './utils/init'
 
 const signUpPath = '/auth/sign-up'
 const signInPath = '/auth/sign-in'
+const protectedHealthPath = '/protected-health'
 
 describe('Auth (e2e)', () => {
   let app: INestApplication
@@ -15,6 +16,26 @@ describe('Auth (e2e)', () => {
     done()
   })
 
+  describe('when attempting to access protected endpoint without authorization', () => {
+    beforeEach(async () => {
+      result = await request(app.getHttpServer()).get(protectedHealthPath)
+    })
+
+    it('returns 401 error response', () => {
+      expect(result.status).toBe(401)
+      expect(result.body).toMatchInlineSnapshot(`
+        Object {
+          "timestamp": __TIMESTAMP__,
+          "statusCode": 401,
+          "path": "/protected-health",
+          "errorType": "Unauthorized",
+          "message": "Unauthorized",
+          "errorFields": Array [],
+        }
+      `)
+    })
+  })
+
   describe('when signing up', () => {
     describe('when passing valid data', () => {
       const mockedSignUpData: SignUpDto = {
@@ -22,10 +43,13 @@ describe('Auth (e2e)', () => {
         password: '123abcABC',
       }
 
+      let receivedToken: string
+
       beforeEach(async () => {
         result = await request(app.getHttpServer())
           .post(signUpPath)
           .send(mockedSignUpData)
+        receivedToken = result.body.token.value
       })
 
       it('returns 201 response with user data and token', () => {
@@ -54,12 +78,26 @@ describe('Auth (e2e)', () => {
         )
       })
 
+      describe('when accessing protected endpoint with received token', () => {
+        beforeEach(async () => {
+          result = await request(app.getHttpServer())
+            .get(protectedHealthPath)
+            .set('Authorization', `Bearer ${receivedToken}`)
+        })
+
+        it('returns 200 response with payload', () => {
+          expect(result.status).toBe(200)
+          expect(result.text).toMatchInlineSnapshot(`"Protected and healthy!"`)
+        })
+      })
+
       describe('when attempting to sign in', () => {
         describe('when using data that have been used to sign up', () => {
           beforeEach(async () => {
             result = await request(app.getHttpServer())
               .post(signInPath)
               .send(mockedSignUpData)
+            receivedToken = result.body.token.value
           })
 
           it('signs user in and returns 201 response with his data and token', () => {
@@ -86,6 +124,21 @@ describe('Auth (e2e)', () => {
               }
             `,
             )
+          })
+
+          describe('when accessing protected endpoint with received token', () => {
+            beforeEach(async () => {
+              result = await request(app.getHttpServer())
+                .get(protectedHealthPath)
+                .set('Authorization', `Bearer ${receivedToken}`)
+            })
+
+            it('returns 200 response with payload', () => {
+              expect(result.status).toBe(200)
+              expect(result.text).toMatchInlineSnapshot(
+                `"Protected and healthy!"`,
+              )
+            })
           })
         })
 

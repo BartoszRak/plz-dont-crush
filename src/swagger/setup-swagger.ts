@@ -6,6 +6,7 @@ import { SwaggerConfigEnvs } from './swagger.config'
 
 export enum ApiTag {
   Auth = 'auth',
+  Health = 'health'
 }
 
 export const setupSwagger = (app: NestExpressApplication): void => {
