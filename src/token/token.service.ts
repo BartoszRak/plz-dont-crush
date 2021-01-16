@@ -5,8 +5,9 @@ import { Repository } from 'typeorm'
 import { CryptoService } from '@main/crypto'
 import { UserId } from '@main/user'
 
-import { Token } from './token'
+import { Token } from './domain/token'
 import { TokenEntity } from './token.entity'
+import { TokenFactory } from './domain/token-factory'
 
 @Injectable()
 export class TokenService {
@@ -14,6 +15,7 @@ export class TokenService {
     @InjectRepository(TokenEntity)
     private readonly tokensRepository: Repository<TokenEntity>,
     private readonly cryptoService: CryptoService,
+    private readonly tokenFactory: TokenFactory
   ) {}
 
   /**
@@ -32,6 +34,6 @@ export class TokenService {
         userId: userId.value,
       }),
     )
-    return Token.fromEntity(token)
+    return this.tokenFactory.create(token)
   }
 }

@@ -1,2 +1,2 @@
 export { AuthModule } from './auth.module'
-export { Auth } from './auth'
+export { Auth } from './domain/auth'

@@ -1,10 +1,10 @@
 import { Token } from '@main/token'
 import { User } from '@main/user'
 import { plainToClass } from 'class-transformer'
-import { AuthDto } from './dto/auth.dto'
+import { AuthDto } from '../dto/auth.dto'
 
 export class Auth {
-  protected constructor(
+  constructor(
     public readonly user: User,
     public readonly token: Token,
   ) {}
@@ -14,9 +14,5 @@ export class Auth {
       user: this.user.toDto(),
       token: this.token.toDto(),
     })
-  }
-
-  static create(user: User, token: Token): Auth {
-    return new Auth(user, token)
   }
 }
