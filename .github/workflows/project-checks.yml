@@ -39,3 +39,42 @@ jobs:
         uses: codecov/codecov-action@v1.0.11
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+  runner-job:
+    name: E2E Tests
+    runs-on: ubuntu-18.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:13.0-alpine
+        env:
+          POSTGRES_PASSWORD: ${{ github.run_id }}
+          POSTGRES_DB: ${{ github.run_id }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn --prefer-offline
+      - name: Build app
+        run: yarn build
+      - name: Migrations and E2E tests
+        run: |
+          yarn migration:run:prod
+          yarn test:e2e
+        env:
+          DB_HOST: localhost
+          DB_NAME: ${{ github.run_id }}
+          DB_USERNAME: postgres
+          DB_PASSWORD: ${{ github.run_id }}
+          DB_PORT: 5432
+          DB_TYPE: postgres
+          DB_LOGGING: 0
+          DB_SYNCHRONIZE: 0
+          SWAGGER_USER: admin
+          SWAGGER_PASSWORD: 1234
+          SWAPI_BASE_URL: https://swapi.dev/api
