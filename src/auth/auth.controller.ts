@@ -4,7 +4,6 @@ import {
   ConflictException,
   Controller,
   HttpException,
-  NotFoundException,
   Post,
   UnprocessableEntityException,
 } from '@nestjs/common'
@@ -39,7 +38,8 @@ export class AuthController {
     )
     if (isLeft(signUpResult)) {
       // Explanation: For future - this endpoint should never return an error
-      // different than 400 to prevent resources scanning.
+      // different than 400 to prevent resources scanning. But for now there is
+      // no email-confirmation so there is no sense in implementing that.
       const exceptionByError: Record<SignUpError, HttpException> = {
         [SignUpError.AlreadyExists]: new ConflictException(
           'User with this email already exists.',
@@ -65,13 +65,12 @@ export class AuthController {
       new Password(password),
     )
     if (isLeft(signInResult)) {
+      const invalidDataException = new BadRequestException(
+        'Invalid email or password.',
+      )
       const exceptionByError: Record<SignInError, HttpException> = {
-        [SignInError.UserNotFound]: new NotFoundException(
-          'User has not been found.',
-        ),
-        [SignInError.PasswordInvalid]: new BadRequestException(
-          'Password invalid.',
-        ),
+        [SignInError.UserNotFound]: invalidDataException,
+        [SignInError.PasswordInvalid]: invalidDataException,
       }
       throw exceptionByError[signInResult.left.error.errorCode]
     }

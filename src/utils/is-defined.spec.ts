@@ -1,6 +1,6 @@
 import { isDefined, assertIsDefined } from './is-defined'
 
-describe(`isDefined`, () => {
+describe(`isDefined()`, () => {
   describe.each([
     [null, false],
     [undefined, false],
@@ -14,7 +14,7 @@ describe(`isDefined`, () => {
   })
 })
 
-describe('assertIsDefined', () => {
+describe('assertIsDefined()', () => {
   describe.each(['', [], {}, 0, '0', false])(
     'when value equals to to %p',
     value => {

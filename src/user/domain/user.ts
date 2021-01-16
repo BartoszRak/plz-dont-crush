@@ -3,7 +3,6 @@ import { SwapiCharacterId } from '@main/swapi'
 
 import { plainToClass } from 'class-transformer'
 import { UserDto } from '../dto/user.dto'
-import { UserEntity } from '../user.entity'
 import { UserEmail, UserId } from './user-values'
 
 export class User {

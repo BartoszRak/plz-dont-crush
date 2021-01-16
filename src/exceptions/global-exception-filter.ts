@@ -1,3 +1,4 @@
+import { isPropDefined, isRecord } from '@main/utils'
 import {
   ArgumentsHost,
   Catch,
@@ -10,8 +11,6 @@ import {
 import { BaseExceptionFilter } from '@nestjs/core'
 import { Request, Response } from 'express'
 import * as httpStatus from 'http-status'
-
-import { isPropDefined, isRecord } from '@main/utils'
 
 import { ErrorDto } from './error.dto'
 

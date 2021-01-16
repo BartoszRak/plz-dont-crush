@@ -1,8 +1,9 @@
+import { Password, PasswordHash } from '@main/shared'
 import { Test } from '@nestjs/testing'
 
 import { CryptoService } from './crypto.service'
 
-const mockedPassword = 'abc123'
+const mockedPassword = new Password('abc123')
 
 let service: CryptoService
 let result: unknown
@@ -17,15 +18,15 @@ beforeEach(async () => {
 
 describe('hashPassword() & validatePassword()', () => {
   describe('when attempting to hash raw password', () => {
-    let createdHash: string
+    let createdHash: PasswordHash
 
     beforeEach(async () => {
       createdHash = await service.hashPassword(mockedPassword)
     })
 
     it('returns a valid hash', () => {
-      expect(createdHash).not.toBe(mockedPassword)
-      expect(createdHash.length).not.toBe(0)
+      expect(createdHash.value).not.toBe(mockedPassword.value)
+      expect(createdHash.value.length).not.toBe(0)
     })
 
     describe('when attempting to validate created hash', () => {
@@ -42,7 +43,7 @@ describe('hashPassword() & validatePassword()', () => {
       describe('when passing invalid password', () => {
         beforeEach(async () => {
           result = await service.validatePassword(
-            'invalid-password',
+            new Password('invalid-password'),
             createdHash,
           )
         })

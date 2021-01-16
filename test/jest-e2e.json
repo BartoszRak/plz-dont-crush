@@ -2,8 +2,23 @@
   "moduleFileExtensions": ["js", "json", "ts"],
   "rootDir": ".",
   "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
+  "snapshotSerializers": [
+    "<rootDir>/serializers/timestamp.serializer.ts",
+    "<rootDir>/serializers/id.serializer.ts"
+  ],
+  "testRegex": ".*.e2e-spec.ts$",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+    "^.+\\.ts$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@main/(.*)$": "<rootDir>/../src/$1"
+  },
+  "bail": 1,
+  "globals": {
+    "ts-jest": {
+      "tsConfig": "<rootDir>/tsconfig.spec.json",
+      "isolatedModules": true
+    }
+  },
+  "testTimeout": 30000
 }
