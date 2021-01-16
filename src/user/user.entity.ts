@@ -11,6 +11,9 @@ export class UserEntity extends StandardEntity {
   @Column()
   passwordHash!: string
 
+  @Column('int')
+  swapiCharacterId!: number
+
   @OneToMany(
     () => TokenEntity,
     token => token.user,

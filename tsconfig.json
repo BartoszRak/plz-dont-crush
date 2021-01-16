@@ -12,8 +12,10 @@
     "baseUrl": "./",
     "incremental": true,
     "noImplicitAny": true,
+    "skipLibCheck": true,
     "paths": {
       "@main/*": ["./src/*"]
-    },
-  }
+    }
+  },
+  "exclude": ["node_modules", "dist"]
 }

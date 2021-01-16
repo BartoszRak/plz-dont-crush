@@ -478,6 +478,11 @@
     tslib "1.11.1"
     uuid "7.0.1"
 
+"@nestjs/cqrs@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/cqrs/-/cqrs-7.0.1.tgz#35b1137ad8fa54329c8ee4cea035ff55d9c2a98a"
+  integrity sha512-4UJAH3ryJvT+SDeuB5ls1OpJsPr3xqsyiuWCfVd1oyzCLazuxl04t/xup005HtWdxczwLgaAau7SIAb+XZotBQ==
+
 "@nestjs/mapped-types@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.1.1.tgz#2fa9ff0f1ddbe66d5d1c80ae59df21c0ed0d1361"
@@ -2908,6 +2913,11 @@ forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
   integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
+
+fp-ts@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.9.3.tgz#419b9103018ddf7c785acf2b3fecb2662afab5af"
+  integrity sha512-NjzcHYgigcbPQ6yJ52zwgsVDwKz3vwy9sjbxyzcvfXQm+j1BGeOPRuzLKEwsLyE4Xut6gG1FXJtsU9/gUB7tXg==
 
 fragment-cache@^0.2.1:
   version "0.2.1"

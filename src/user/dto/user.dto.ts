@@ -14,4 +14,11 @@ export class UserDto {
     example: 'user@example.com',
   })
   email!: string
+
+  @ApiProperty({
+    description: `User's SWAPI randomly assigned character's ID`,
+    required: true,
+    example: 14,
+  })
+  swapiCharacterId!: number
 }

@@ -39,7 +39,7 @@ const rawDatabaseConfig = (): DatabaseConfig => {
     database: envs.DB_NAME,
     port: parseInt(envs.DB_PORT, 10),
     url: `postgres://${envs.DB_USERNAME}:${envs.DB_PASSWORD}@${envs.DB_HOST}:${envs.DB_PORT}/${envs.DB_NAME}`,
-    entities: [__dirname + '/../**/**/!(*.d).entity.{ts,js}'],
+    entities: [__dirname + '/**/**/!(*.d).entity.{ts,js}'],
     logging: Boolean(parseInt(envs.DB_LOGGING, 10)),
     synchronize: Boolean(parseInt(envs.DB_SYNCHRONIZE, 10)),
   }
