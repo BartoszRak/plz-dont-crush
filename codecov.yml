@@ -1,0 +1,6 @@
+ignore:
+  - "**/*.dto.ts"
+  - "**/*.module.ts"
+  - "**/__mocks__/*"
+  - "**/__fakes__/*"
+  - "**/__tests__/*"
