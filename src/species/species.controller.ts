@@ -17,6 +17,7 @@ import { isDefined } from '@main/utils'
 import { SwapiSpeciesDto } from '@main/swapi/dto/swapi-species.dto'
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { ApiTag } from '@main/swagger/setup-swagger'
+import { UserSpecificCacheInterceptor } from '@main/cache'
 
 @ApiTags(ApiTag.Species)
 @Controller('species')
@@ -59,6 +60,7 @@ export class SpeciesController {
     type: SwapiSpeciesDto,
     isArray: true,
   })
+  @UseInterceptors(UserSpecificCacheInterceptor)
   @Protect()
   @Get()
   async getMySpecies(
