@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-export class SwapiCharacterDto {
+export class CharacterDto {
   @ApiProperty({
     description: `SWAPI character's ID`,
     example: 15,

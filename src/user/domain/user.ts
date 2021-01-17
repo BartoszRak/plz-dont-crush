@@ -13,6 +13,10 @@ export class User {
     readonly passwordHash: PasswordHash,
   ) {}
 
+  hasPermissionsToSpecies(speciesId: number): boolean {
+    return this.swapiCharacter.isSpecies(speciesId)
+  }
+
   toDto(): UserDto {
     const plainDto: UserDto = {
       id: this.id.value,

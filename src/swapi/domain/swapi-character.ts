@@ -1,8 +1,15 @@
 import { SwapiCharacterId } from '@main/swapi'
-
 import { plainToClass } from 'class-transformer'
-import { SwapiCharacterDto } from '../dto/swapi-character.dto'
-import { SwapiCharacterFilmsIds, SwapiCharacterPlanetId, SwapiCharacterName, SwapiCharacterSpeciesIds, SwapiCharacterStarshipsIds, SwapiCharacterVehiclesIds } from './swapi-character-values'
+
+import { CharacterDto } from '../dto/swapi-character.dto'
+import {
+  SwapiCharacterFilmsIds,
+  SwapiCharacterPlanetId,
+  SwapiCharacterName,
+  SwapiCharacterSpeciesIds,
+  SwapiCharacterStarshipsIds,
+  SwapiCharacterVehiclesIds,
+} from './swapi-character-values'
 
 export class SwapiCharacter {
   constructor(
@@ -12,11 +19,15 @@ export class SwapiCharacter {
     readonly speciesIds: SwapiCharacterSpeciesIds,
     readonly vehiclesIds: SwapiCharacterVehiclesIds,
     readonly starshipsIds: SwapiCharacterStarshipsIds,
-    readonly planetId: SwapiCharacterPlanetId
+    readonly planetId: SwapiCharacterPlanetId,
   ) {}
 
-  toDto(): SwapiCharacterDto {
-    const plainDto: SwapiCharacterDto = {
+  isSpecies(speciesId: number): boolean {
+    return this.speciesIds.value.includes(speciesId)
+  }
+
+  toDto(): CharacterDto {
+    const plainDto: CharacterDto = {
       id: this.id.value,
       name: this.name.value,
       planetId: this.planetId.value,
@@ -25,6 +36,6 @@ export class SwapiCharacter {
       vehiclesIds: this.vehiclesIds.value,
       starshipsIds: this.starshipsIds.value,
     }
-    return plainToClass(SwapiCharacterDto, plainDto)
+    return plainToClass(CharacterDto, plainDto)
   }
 }

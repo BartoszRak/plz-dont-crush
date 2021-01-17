@@ -1,4 +1,4 @@
-import { SwapiCharacterDto } from '@main/swapi'
+import { CharacterDto } from '@main/swapi'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class UserDto {
@@ -17,5 +17,5 @@ export class UserDto {
   email!: string
 
   @ApiProperty()
-  swapiCharacter!: SwapiCharacterDto
+  swapiCharacter!: CharacterDto
 }

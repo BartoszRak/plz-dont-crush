@@ -10,6 +10,7 @@ import { envsValidationSchema } from './config.envs'
 import { CryptoModule } from './crypto'
 import { databaseConfig, DatabaseConfig } from './database-config'
 import { HealthController } from './health.controller'
+import { SpeciesModule } from './species'
 import { SwapiModule } from './swapi'
 import { TokenModule } from './token'
 import { UserModule } from './user/user.module'
@@ -29,7 +30,8 @@ import { UserModule } from './user/user.module'
     AuthModule,
     UserModule,
     SwapiModule,
-    CacheModule
+    CacheModule,
+    SpeciesModule,
   ],
   controllers: [HealthController],
   providers: [AppService],

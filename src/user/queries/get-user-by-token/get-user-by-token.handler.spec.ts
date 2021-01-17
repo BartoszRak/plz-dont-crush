@@ -17,7 +17,14 @@ import {
   SwapiCharacter,
   SwapiCharacterId,
 } from '@main/swapi'
-import { SwapiCharacterName } from '@main/swapi/domain/swapi-character-values'
+import {
+  SwapiCharacterFilmsIds,
+  SwapiCharacterName,
+  SwapiCharacterPlanetId,
+  SwapiCharacterSpeciesIds,
+  SwapiCharacterStarshipsIds,
+  SwapiCharacterVehiclesIds,
+} from '@main/swapi/domain/swapi-character-values'
 
 let handler: GetUserByTokenHandler
 let userRepositoryMock: jest.Mocked<Repository<UserEntity>>
@@ -33,6 +40,11 @@ beforeEach(async () => {
       new SwapiCharacter(
         new SwapiCharacterId(13),
         new SwapiCharacterName('John James'),
+        new SwapiCharacterFilmsIds([14, 52]),
+        new SwapiCharacterSpeciesIds([2]),
+        new SwapiCharacterVehiclesIds([]),
+        new SwapiCharacterStarshipsIds([3, 2, 63, 12]),
+        new SwapiCharacterPlanetId(55),
       ),
     )
 
@@ -122,8 +134,23 @@ describe('when getting user', () => {
           "id": "mockedId",
           "passwordHash": "mockedPasswordHash",
           "swapiCharacter": SwapiCharacter {
+            "filmsIds": Array [
+              14,
+              52,
+            ],
             "id": 13,
             "name": "John James",
+            "planetId": 55,
+            "speciesIds": Array [
+              2,
+            ],
+            "starshipsIds": Array [
+              3,
+              2,
+              63,
+              12,
+            ],
+            "vehiclesIds": Array [],
           },
         }
       `)

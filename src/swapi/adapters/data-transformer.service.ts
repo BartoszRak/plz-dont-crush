@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { Character, CharacterWithIds } from '../ports/character'
+import { Species, SpeciesWithIds } from '../ports/species'
 
 @Injectable()
 export class DataTransformerService {
-  transformCharacter(character: Character): CharacterWithIds {
+  extendCharacter(character: Character): CharacterWithIds {
     const characterWithId = this.addId(character)
     const { homeworld, species, vehicles, starships, films } = characterWithId
     return {
@@ -13,6 +14,17 @@ export class DataTransformerService {
       vehiclesIds: this.extractIdsFromMultipleUrls(vehicles),
       starshipsIds: this.extractIdsFromMultipleUrls(starships),
       filmsIds: this.extractIdsFromMultipleUrls(films),
+    }
+  }
+
+  extendSpecies(species: Species): SpeciesWithIds {
+    const speciesWithId = this.addId(species)
+    const { films, homeworld, people } = speciesWithId
+    return {
+      ...speciesWithId,
+      planetId: this.extractIdFromUrl(homeworld),
+      filmsIds: this.extractIdsFromMultipleUrls(films),
+      charactersIds: this.extractIdsFromMultipleUrls(people),
     }
   }
 

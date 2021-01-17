@@ -1,8 +1,7 @@
-import { Character, CharacterWithIds } from "./character";
-import { WithIds } from "./with-ids.type";
+import { CharacterWithIds } from "./character";
 
 export abstract class CharacterRepository {
-  abstract getRandomCharacter(): Promise<WithIds<CharacterWithIds>>
+  abstract getRandomCharacter(): Promise<CharacterWithIds>
 
-  abstract getCharacter(id: number): Promise<WithIds<CharacterWithIds> | undefined>
+  abstract getCharacter(id: number): Promise<CharacterWithIds | undefined>
 }
