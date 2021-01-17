@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common'
+
+import { isDefined } from '@main/utils'
+
 import { SwapiCharacterId } from '../domain/swapi-character-values'
 import { CharacterRepository } from '../ports/character-repository'
 import { CharactersManager as CharactersManagerContract } from '../contract/characters-manager'
 import { SwapiCharacter } from '../domain/swapi-character'
-import { isDefined } from '@main/utils'
 import { SwapiCharacterFactory } from '../domain/swapi-character.factory'
 
 @Injectable()
@@ -23,10 +25,7 @@ export class CharactersManager implements CharactersManagerContract {
   ): Promise<SwapiCharacter | undefined> {
     const character = await this.swapiRepository.getCharacter(id.value)
     return isDefined(character)
-      ? this.swapiCharacterFactory.create({
-          id: character.id,
-          name: character.name,
-        })
+      ? this.swapiCharacterFactory.create(character)
       : undefined
   }
 }

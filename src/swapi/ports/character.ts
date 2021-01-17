@@ -1,3 +1,5 @@
+import { WithIds } from "./with-ids.type";
+
 export interface Character {
   name: string
   height: string
@@ -17,3 +19,4 @@ export interface Character {
   url: string
 }
 
+export type CharacterWithIds = WithIds<Character, 'homeworldId', 'speciesIds' | 'starshipsIds' | 'vehiclesIds' | 'filmsIds'>

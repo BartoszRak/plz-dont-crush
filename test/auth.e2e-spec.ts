@@ -62,6 +62,12 @@ describe('Auth (e2e)', () => {
             user: {
               swapiCharacter: {
                 id: expect.any(Number),
+                name: expect.any(String),
+                planetId: expect.any(Number),
+                filmsIds: expect.any(Array),
+                speciesIds: expect.any(Array),
+                vehiclesIds: expect.any(Array),
+                starshipsIds: expect.any(Array),
               },
             },
           },
@@ -75,7 +81,12 @@ describe('Auth (e2e)', () => {
               "email": "mocked@email.com",
               "swapiCharacter": Object {
                   "id": __ID__,
-                  "name": "Poggle the Lesser",
+                  "name": Any<String>,
+                  "planetId": Any<Number>,
+                  "filmsIds": Any<Array>,
+                  "speciesIds": Any<Array>,
+                  "vehiclesIds": Any<Array>,
+                  "starshipsIds": Any<Array>,
               },
           },
           }
@@ -115,6 +126,12 @@ describe('Auth (e2e)', () => {
                 user: {
                   swapiCharacter: {
                     id: expect.any(Number),
+                    name: expect.any(String),
+                    planetId: expect.any(Number),
+                    filmsIds: expect.any(Array),
+                    speciesIds: expect.any(Array),
+                    vehiclesIds: expect.any(Array),
+                    starshipsIds: expect.any(Array),
                   },
                 },
               },
@@ -128,7 +145,12 @@ describe('Auth (e2e)', () => {
                   "email": "mocked@email.com",
                   "swapiCharacter": Object {
                       "id": __ID__,
-                      "name": "Adi Gallia",
+                      "name": Any<String>,
+                      "planetId": Any<Number>,
+                      "filmsIds": Any<Array>,
+                      "speciesIds": Any<Array>,
+                      "vehiclesIds": Any<Array>,
+                      "starshipsIds": Any<Array>,
                   },
               },
               }

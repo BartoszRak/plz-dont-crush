@@ -1,1 +1,0 @@
-export type WithId<Data, IdType = number> = Data & { id: IdType }

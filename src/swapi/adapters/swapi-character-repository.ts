@@ -1,8 +1,9 @@
-import { getRandomInt, isDefined } from '@main/utils'
 import { HttpService, Inject, Injectable } from '@nestjs/common'
-import { Character } from '../ports/character'
+
+import { getRandomInt, isDefined } from '@main/utils'
+
+import { Character, CharacterWithIds } from '../ports/character'
 import { CharacterRepository } from '../ports/character-repository'
-import { WithId } from '../ports/with-id.type'
 import { DataTransformerService } from './data-transformer.service'
 import { SwapiPaginatedResponse } from './swapi-paginated-response'
 import { SwapiConfig, swapiConfig } from './swapi.config'
@@ -15,7 +16,7 @@ export class SwapiCharacterRepository implements CharacterRepository {
     private readonly dataTransformer: DataTransformerService,
   ) {}
 
-  async getRandomCharacter(): Promise<WithId<Character>> {
+  async getRandomCharacter(): Promise<CharacterWithIds> {
     const response = await this.httpService
       .get<SwapiPaginatedResponse<Character[]>>(`${this.config.baseUrl}/people`)
       .toPromise()
@@ -28,10 +29,10 @@ export class SwapiCharacterRepository implements CharacterRepository {
     if (!isDefined(character)) {
       throw new Error('Unexpectedly random character not found.')
     }
-    return this.dataTransformer.addId(character)
+    return character
   }
 
-  async getCharacter(id: number): Promise<WithId<Character> | undefined> {
+  async getCharacter(id: number): Promise<CharacterWithIds | undefined> {
     const response = await this.httpService
       .get<Character>(`${this.config.baseUrl}/people/${id}`)
       .toPromise()
@@ -41,6 +42,6 @@ export class SwapiCharacterRepository implements CharacterRepository {
     if (response.status !== 200) {
       throw new Error('Unknown error when getting character.')
     }
-    return this.dataTransformer.addId(response.data)
+    return this.dataTransformer.transformCharacter(response.data)
   }
 }
