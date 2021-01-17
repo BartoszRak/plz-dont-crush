@@ -20,6 +20,6 @@ export class GetUserByEmailHandler
     const user = await this.userRepository.findOne({
       email: email.value,
     })
-    return isDefined(user) ? this.userFactory.create(user) : undefined
+    return isDefined(user) ? await this.userFactory.create(user) : undefined
   }
 }

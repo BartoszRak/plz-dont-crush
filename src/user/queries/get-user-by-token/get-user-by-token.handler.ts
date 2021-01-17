@@ -22,6 +22,6 @@ export class GetUserByTokenHandler
       .leftJoin('user.tokens', 'token')
       .where('token.value = :tokenValue', { tokenValue: tokenValue.value })
       .getOne()
-    return isDefined(user) ? this.userFactory.create(user) : undefined
+    return isDefined(user) ? await this.userFactory.create(user) : undefined
   }
 }

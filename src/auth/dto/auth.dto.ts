@@ -3,15 +3,9 @@ import { UserDto } from '@main/user'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class AuthDto {
-  @ApiProperty({
-    required: true,
-    type: UserDto,
-  })
+  @ApiProperty()
   user!: UserDto
 
-  @ApiProperty({
-    required: true,
-    type: TokenDto,
-  })
+  @ApiProperty()
   token!: TokenDto
 }

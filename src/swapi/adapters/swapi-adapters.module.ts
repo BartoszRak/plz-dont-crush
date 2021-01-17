@@ -1,8 +1,8 @@
 import { HttpModule, Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { SwapiRepository } from '../ports/swapi-repository'
+import { CharacterRepository } from '../ports/character-repository'
 import { DataTransformerService } from './data-transformer.service'
-import { Repository } from './repository'
+import { SwapiCharacterRepository } from './swapi-character-repository'
 import { swapiConfig } from './swapi.config'
 
 @Module({
@@ -10,10 +10,10 @@ import { swapiConfig } from './swapi.config'
   providers: [
     DataTransformerService,
     {
-      provide: SwapiRepository,
-      useClass: Repository,
+      provide: CharacterRepository,
+      useClass: SwapiCharacterRepository,
     },
   ],
-  exports: [SwapiRepository],
+  exports: [CharacterRepository],
 })
-export class AdaptersModule {}
+export class SwapiAdaptersModule {}

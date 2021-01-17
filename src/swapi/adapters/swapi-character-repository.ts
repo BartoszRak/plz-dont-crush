@@ -1,14 +1,14 @@
 import { getRandomInt, isDefined } from '@main/utils'
 import { HttpService, Inject, Injectable } from '@nestjs/common'
 import { Character } from '../ports/character'
-import { SwapiRepository } from '../ports/swapi-repository'
+import { CharacterRepository } from '../ports/character-repository'
 import { WithId } from '../ports/with-id.type'
 import { DataTransformerService } from './data-transformer.service'
 import { SwapiPaginatedResponse } from './swapi-paginated-response'
 import { SwapiConfig, swapiConfig } from './swapi.config'
 
 @Injectable()
-export class Repository implements SwapiRepository {
+export class SwapiCharacterRepository implements CharacterRepository {
   constructor(
     @Inject(swapiConfig.KEY) private readonly config: SwapiConfig,
     private readonly httpService: HttpService,

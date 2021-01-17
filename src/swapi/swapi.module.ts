@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common'
-import { AdaptersModule } from './adapters'
-import { SwapiService } from './swapi.service'
+import { SwapiApplicationModule } from './application/swapi-application.module'
 
 @Module({
-  imports: [AdaptersModule],
-  providers: [SwapiService],
-  exports: [SwapiService]
+  imports: [SwapiApplicationModule],
+  exports: [SwapiApplicationModule],
 })
 export class SwapiModule {}

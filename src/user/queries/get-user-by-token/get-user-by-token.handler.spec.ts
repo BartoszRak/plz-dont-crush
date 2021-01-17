@@ -12,16 +12,36 @@ import {
 
 import { GetUserByTokenHandler } from './get-user-by-token.handler'
 import { GetUserByToken } from './get-user-by-token.query'
+import {
+  CharactersManager,
+  SwapiCharacter,
+  SwapiCharacterId,
+} from '@main/swapi'
+import { SwapiCharacterName } from '@main/swapi/domain/swapi-character-values'
 
 let handler: GetUserByTokenHandler
 let userRepositoryMock: jest.Mocked<Repository<UserEntity>>
+let charactersManagerMock: jest.Mocked<CharactersManager>
 let result: unknown
 
 beforeEach(async () => {
   userRepositoryMock = {} as jest.Mocked<Repository<UserEntity>>
+  charactersManagerMock = {} as jest.Mocked<CharactersManager>
+  charactersManagerMock.getCharacterById = jest
+    .fn()
+    .mockReturnValue(
+      new SwapiCharacter(
+        new SwapiCharacterId(13),
+        new SwapiCharacterName('John James'),
+      ),
+    )
 
   const mockedModule = await Test.createTestingModule({
     providers: [
+      {
+        provide: CharactersManager,
+        useValue: charactersManagerMock,
+      },
       UserFactory,
       GetUserByTokenHandler,
       {
@@ -101,7 +121,10 @@ describe('when getting user', () => {
           "email": "user@email.com",
           "id": "mockedId",
           "passwordHash": "mockedPasswordHash",
-          "swapiCharacterId": 52,
+          "swapiCharacter": SwapiCharacter {
+            "id": 13,
+            "name": "John James",
+          },
         }
       `)
     })

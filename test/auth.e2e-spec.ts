@@ -60,7 +60,9 @@ describe('Auth (e2e)', () => {
               value: expect.any(String),
             },
             user: {
-              swapiCharacterId: expect.any(Number),
+              swapiCharacter: {
+                id: expect.any(Number),
+              },
             },
           },
           `
@@ -71,7 +73,10 @@ describe('Auth (e2e)', () => {
             "user": Object {
               "id": __ID__,
               "email": "mocked@email.com",
-              "swapiCharacterId": Any<Number>,
+              "swapiCharacter": Object {
+                  "id": __ID__,
+                  "name": "Poggle the Lesser",
+              },
           },
           }
         `,
@@ -108,7 +113,9 @@ describe('Auth (e2e)', () => {
                   value: expect.any(String),
                 },
                 user: {
-                  swapiCharacterId: expect.any(Number),
+                  swapiCharacter: {
+                    id: expect.any(Number),
+                  },
                 },
               },
               `
@@ -119,7 +126,10 @@ describe('Auth (e2e)', () => {
                 "user": Object {
                   "id": __ID__,
                   "email": "mocked@email.com",
-                  "swapiCharacterId": Any<Number>,
+                  "swapiCharacter": Object {
+                      "id": __ID__,
+                      "name": "Adi Gallia",
+                  },
               },
               }
             `,

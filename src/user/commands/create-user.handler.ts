@@ -5,12 +5,12 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { CryptoService } from '@main/crypto'
 import { Failure } from '@main/utils'
-import { SwapiService } from '@main/swapi'
 
 import { User } from '../domain/user'
 import { UserEntity } from '../user.entity'
 import { CreateUser, CreateUserError } from './create-user.command'
 import { UserFactory } from '../domain/user.factory'
+import { CharactersManager } from '@main/swapi'
 
 @CommandHandler(CreateUser)
 export class CreateUserHandler implements IInferringCommandHandler<CreateUser> {
@@ -18,7 +18,7 @@ export class CreateUserHandler implements IInferringCommandHandler<CreateUser> {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private readonly cryptoService: CryptoService,
-    private readonly swapiService: SwapiService,
+    private readonly charactersManager: CharactersManager,
     private readonly userFactory: UserFactory
 
   ) {}
@@ -34,7 +34,7 @@ export class CreateUserHandler implements IInferringCommandHandler<CreateUser> {
       if (existingUser) {
         return left(new Failure(CreateUserError.AlreadyExists))
       }
-      const swapiCharacterId = await this.swapiService.getRandomCharacterId()
+      const swapiCharacterId = await this.charactersManager.getRandomCharacterId()
       const passwordHash = await this.cryptoService.hashPassword(password)
       const createdUser = await manager.save(
         UserEntity,
@@ -44,7 +44,7 @@ export class CreateUserHandler implements IInferringCommandHandler<CreateUser> {
           swapiCharacterId: swapiCharacterId.value,
         }),
       )
-      return right(this.userFactory.create(createdUser))
+      return right(await this.userFactory.create(createdUser))
     })
   }
 }

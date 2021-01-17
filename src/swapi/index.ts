@@ -1,4 +1,7 @@
 export { SwapiModule } from './swapi.module'
-export { SwapiService } from './swapi.service'
+export { SwapiCharacterDto } from './dto/swapi-character.dto'
 
-export { SwapiCharacterId } from './domain/swapi-character.id'
+export { CharactersManager } from './contract/characters-manager'
+
+export { SwapiCharacterId } from './domain/swapi-character-values'
+export { SwapiCharacter } from './domain/swapi-character'

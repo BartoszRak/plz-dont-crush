@@ -1,5 +1,5 @@
 import { PasswordHash } from '@main/shared'
-import { SwapiCharacterId } from '@main/swapi'
+import { SwapiCharacter, SwapiCharacterId } from '@main/swapi'
 
 import { plainToClass } from 'class-transformer'
 import { UserDto } from '../dto/user.dto'
@@ -9,7 +9,7 @@ export class User {
    constructor(
     readonly id: UserId,
     readonly email: UserEmail,
-    readonly swapiCharacterId: SwapiCharacterId,
+    readonly swapiCharacter: SwapiCharacter,
     readonly passwordHash: PasswordHash,
   ) {}
 
@@ -17,7 +17,7 @@ export class User {
     return plainToClass(UserDto, {
       id: this.id.value,
       email: this.email.value,
-      swapiCharacterId: this.swapiCharacterId.value,
-    })
+      swapiCharacter: this.swapiCharacter.toDto(),
+    } as UserDto)
   }
 }

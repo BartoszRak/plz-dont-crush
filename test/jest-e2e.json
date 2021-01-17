@@ -6,6 +6,9 @@
     "<rootDir>/serializers/timestamp.serializer.ts",
     "<rootDir>/serializers/id.serializer.ts"
   ],
+  "setupFiles": [
+    "<rootDir>/../.jest/setup-envs-e2e.ts"
+  ],
   "testRegex": ".*.e2e-spec.ts$",
   "transform": {
     "^.+\\.ts$": "ts-jest"

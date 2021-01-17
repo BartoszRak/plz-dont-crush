@@ -78,3 +78,9 @@ jobs:
           SWAGGER_USER: admin
           SWAGGER_PASSWORD: 1234
           SWAPI_BASE_URL: https://swapi.dev/api
+          REDIS_PORT: 6379
+          REDIS_PASSWORD: example
+          REDIS_DB: 0
+          REDIS_HOST: localhost
+          REDIS_ON: 0
+          CACHE_TTL: 5

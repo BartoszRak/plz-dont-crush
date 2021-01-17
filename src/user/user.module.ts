@@ -10,7 +10,17 @@ import { GetUserByTokenHandler } from './queries/get-user-by-token/get-user-by-t
 import { UserEntity } from './user.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), CqrsModule, CryptoModule, SwapiModule],
-  providers: [CreateUserHandler, GetUserByEmailHandler, GetUserByTokenHandler, UserFactory]
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    CqrsModule,
+    CryptoModule,
+    SwapiModule,
+  ],
+  providers: [
+    CreateUserHandler,
+    GetUserByEmailHandler,
+    GetUserByTokenHandler,
+    UserFactory,
+  ],
 })
 export class UserModule {}

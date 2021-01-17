@@ -1,3 +1,4 @@
+import { SwapiCharacterDto } from '@main/swapi'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class UserDto {
@@ -15,10 +16,6 @@ export class UserDto {
   })
   email!: string
 
-  @ApiProperty({
-    description: `User's SWAPI randomly assigned character's ID`,
-    required: true,
-    example: 14,
-  })
-  swapiCharacterId!: number
+  @ApiProperty()
+  swapiCharacter!: SwapiCharacterDto
 }
