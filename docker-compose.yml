@@ -18,3 +18,14 @@ services:
       test: "exit 0"
     networks:
       - plz-dont-crush
+  redis:
+    container_name: redis_container
+    image: "bitnami/redis:6.0.10"
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    environment: 
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+    env_file:
+      - "./.env"
+    networks:
+      - plz-dont-crush

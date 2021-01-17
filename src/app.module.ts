@@ -5,6 +5,7 @@ import * as Joi from 'joi'
 
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
+import { CacheModule } from './cache'
 import { envsValidationSchema } from './config.envs'
 import { CryptoModule } from './crypto'
 import { databaseConfig, DatabaseConfig } from './database-config'
@@ -28,6 +29,7 @@ import { UserModule } from './user/user.module'
     AuthModule,
     UserModule,
     SwapiModule,
+    CacheModule
   ],
   controllers: [HealthController],
   providers: [AppService],

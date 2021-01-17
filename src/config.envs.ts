@@ -1,4 +1,12 @@
 import * as Joi from 'joi'
+import {
+  RedisConfigEnvs,
+  redisConfigValidationSchema,
+} from './cache/internal-cache/adapters/redis.config'
+import {
+  CacheConfigEnvs,
+  cacheConfigValidationSchema,
+} from './cache/cache.config'
 
 import {
   DatabaseConfigEnvs,
@@ -12,7 +20,9 @@ import {
 
 export type ConfigsEnvs = DatabaseConfigEnvs &
   SwaggerConfigEnvs &
-  SwapiConfigEnvs
+  SwapiConfigEnvs &
+  RedisConfigEnvs &
+  CacheConfigEnvs
 
 export type EnvsValidationSchema = Record<keyof ConfigsEnvs, Joi.Schema>
 
@@ -20,4 +30,6 @@ export const envsValidationSchema: EnvsValidationSchema = {
   ...swaggerConfigValidationSchema,
   ...databaseConfigValidationSchema,
   ...swapiConfigValidationSchema,
+  ...redisConfigValidationSchema,
+  ...cacheConfigValidationSchema,
 }
