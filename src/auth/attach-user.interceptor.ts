@@ -9,13 +9,14 @@ import { QueryBus } from '@nestjs/cqrs'
 import { TokenValue } from '@main/token'
 import { GetUserByToken } from '@main/user'
 import { isDefined } from '@main/utils'
+import { Request } from 'express'
 
 @Injectable()
 export class AttachUserInterceptor implements NestInterceptor {
   constructor(private readonly queryBus: QueryBus) {}
 
   async intercept(context: ExecutionContext, next: CallHandler) {
-    const req = context.switchToHttp().getRequest()
+    const req: Request = context.switchToHttp().getRequest()
     const authorization: string | undefined = req.headers.authorization
     if (!isDefined(authorization)) {
       return next.handle()
