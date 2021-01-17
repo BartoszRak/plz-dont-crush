@@ -1,5 +1,6 @@
-import { SwapiCharacterId } from '@main/swapi'
 import { plainToClass } from 'class-transformer'
+
+import { SwapiCharacterId } from '@main/swapi'
 
 import { CharacterDto } from '../dto/swapi-character.dto'
 import {
@@ -10,6 +11,7 @@ import {
   SwapiCharacterStarshipsIds,
   SwapiCharacterVehiclesIds,
 } from './swapi-character-values'
+import { SwapiSpeciesId } from './swapi-species-values'
 
 export class SwapiCharacter {
   constructor(
@@ -23,7 +25,11 @@ export class SwapiCharacter {
   ) {}
 
   isSpecies(speciesId: number): boolean {
-    return this.speciesIds.value.includes(speciesId)
+    return this.speciesIds.value.map(({ value }) => value).includes(speciesId)
+  }
+
+  getAssignedSpecies(): SwapiSpeciesId[] {
+    return this.speciesIds.value
   }
 
   toDto(): CharacterDto {
@@ -32,7 +38,7 @@ export class SwapiCharacter {
       name: this.name.value,
       planetId: this.planetId.value,
       filmsIds: this.filmsIds.value,
-      speciesIds: this.speciesIds.value,
+      speciesIds: this.speciesIds.value.map(({ value }) => value),
       vehiclesIds: this.vehiclesIds.value,
       starshipsIds: this.starshipsIds.value,
     }

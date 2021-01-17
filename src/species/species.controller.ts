@@ -52,4 +52,21 @@ export class SpeciesController {
     }
     return species.toDto()
   }
+
+  @ApiResponse({
+    status: 200,
+    description: 'Gets a multiple species with specified ID.',
+    type: SwapiSpeciesDto,
+    isArray: true,
+  })
+  @Protect()
+  @Get()
+  async getMySpecies(
+    @Req() { user }: AuthorizedRequest,
+  ): Promise<SwapiSpeciesDto[]> {
+    const species = await this.speciesManager.getMultipleSpeciesByIds(
+      user.getAssignedCharacterSpeciesIds(),
+    )
+    return species.map(domainSpecies => domainSpecies.toDto())
+  }
 }

@@ -22,7 +22,7 @@ export class SwapiCharacterRepository implements CharacterRepository {
     const response = await this.httpService
       .get<SwapiPaginatedResponse<Character[]>>(`${this.config.baseUrl}/people`)
       .toPromise()
-    this.httpApiHelper.assertRequest(response, 'Unknown error occured when getting random character.')
+    this.httpApiHelper.assertRequest(response)
     const { count } = response.data
     const randomCharacterId = getRandomInt(1, count + 1)
     const character = await this.getCharacter(randomCharacterId)

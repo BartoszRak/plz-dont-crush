@@ -19,4 +19,14 @@ export class SpeciesManager implements SpeciesManagerContract {
     const species = await this.speciesRepository.getSpecies(id.value)
     return isDefined(species) ? this.speciesFactory.create(species) : undefined
   }
+
+  async getMultipleSpeciesByIds(
+    ids: SwapiSpeciesId[],
+  ): Promise<SwapiSpecies[]> {
+    const rawIds = ids.map(id => id.value)
+    const species = await this.speciesRepository.getManySpecies(rawIds)
+    return species.map(speciesProperties =>
+      this.speciesFactory.create(speciesProperties),
+    )
+  }
 }

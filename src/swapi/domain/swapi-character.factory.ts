@@ -10,6 +10,7 @@ import {
   SwapiCharacterStarshipsIds,
   SwapiCharacterVehiclesIds,
 } from './swapi-character-values'
+import { SwapiSpeciesId } from './swapi-species-values'
 
 interface Input {
   id: number
@@ -36,7 +37,9 @@ export class SwapiCharacterFactory {
       new SwapiCharacterId(id),
       new SwapiCharacterName(name),
       new SwapiCharacterFilmsIds(filmsIds),
-      new SwapiCharacterSpeciesIds(speciesIds),
+      new SwapiCharacterSpeciesIds(
+        speciesIds.map(id => new SwapiSpeciesId(id)),
+      ),
       new SwapiCharacterVehiclesIds(vehiclesIds),
       new SwapiCharacterStarshipsIds(starshipsIds),
       new SwapiCharacterPlanetId(homeworldId),
