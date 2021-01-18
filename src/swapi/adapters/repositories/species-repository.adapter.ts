@@ -4,12 +4,12 @@ import { isDefined } from '@main/utils'
 
 import { DataTransformerService } from '../data-transformer.service'
 import { SwapiConfig, swapiConfig } from '../swapi.config'
-import { SpeciesRepository } from '../../ports/species-repository'
+import { SpeciesRepositoryPort } from '../../ports/species-repository.port'
 import { Species, SpeciesWithIds } from '../../ports/species'
 import { HttpApiHelper } from '../http-api-helper.service'
 
 @Injectable()
-export class SwapiSpeciesRepository implements SpeciesRepository {
+export class SpeciesRepositoryAdapter implements SpeciesRepositoryPort {
   constructor(
     @Inject(swapiConfig.KEY) private readonly config: SwapiConfig,
     private readonly httpService: HttpService,

@@ -1,17 +1,17 @@
 import {
   CharactersManager,
-  SwapiCharacter,
-  SwapiCharacterId,
-  SwapiSpeciesId,
+  Character,
+  CharacterId,
+  SpeciesId,
 } from '@main/swapi'
 import {
-  SwapiCharacterFilmsIds,
-  SwapiCharacterName,
-  SwapiCharacterPlanetId,
-  SwapiCharacterSpeciesIds,
-  SwapiCharacterStarshipsIds,
-  SwapiCharacterVehiclesIds,
-} from '@main/swapi/domain/character/swapi-character-values'
+  CharacterFilmsIds,
+  CharacterName,
+  CharacterPlanetId,
+  CharacterSpeciesIds,
+  CharacterStarshipsIds,
+  CharacterVehiclesIds,
+} from '@main/swapi/domain/character/character-values'
 import { Test } from '@nestjs/testing'
 import { UserFactory } from './user.factory'
 
@@ -24,14 +24,14 @@ beforeEach(async () => {
   charactersManagerMock.getCharacterById = jest
     .fn()
     .mockReturnValue(
-      new SwapiCharacter(
-        new SwapiCharacterId(13),
-        new SwapiCharacterName('John James'),
-        new SwapiCharacterFilmsIds([14, 52]),
-        new SwapiCharacterSpeciesIds([]),
-        new SwapiCharacterVehiclesIds([new SwapiSpeciesId(2)]),
-        new SwapiCharacterStarshipsIds([3, 2, 63, 12]),
-        new SwapiCharacterPlanetId(55),
+      new Character(
+        new CharacterId(13),
+        new CharacterName('John James'),
+        new CharacterFilmsIds([14, 52]),
+        new CharacterSpeciesIds([]),
+        new CharacterVehiclesIds([new SpeciesId(2)]),
+        new CharacterStarshipsIds([3, 2, 63, 12]),
+        new CharacterPlanetId(55),
       ),
     )
 
@@ -64,7 +64,7 @@ describe('create()', () => {
         "email": "mocked@email.com",
         "id": "mockedId",
         "passwordHash": "mockedPasswordHash",
-        "swapiCharacter": SwapiCharacter {
+        "swapiCharacter": Character {
           "filmsIds": Array [
             14,
             52,

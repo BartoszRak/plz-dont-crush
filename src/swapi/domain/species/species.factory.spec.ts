@@ -1,16 +1,16 @@
 import { Test } from '@nestjs/testing'
 
-import { SwapiSpeciesFactory } from './swapi-species.factory'
+import { SpeciesFactory } from './species.factory'
 
-let factory: SwapiSpeciesFactory
+let factory: SpeciesFactory
 let result: unknown
 
 beforeEach(async () => {
   const mockedModule = await Test.createTestingModule({
-    providers: [SwapiSpeciesFactory],
+    providers: [SpeciesFactory],
   }).compile()
 
-  factory = mockedModule.get(SwapiSpeciesFactory)
+  factory = mockedModule.get(SpeciesFactory)
 })
 
 describe('create()', () => {
@@ -23,7 +23,7 @@ describe('create()', () => {
 
   it('returns created species', () => {
     expect(result).toMatchInlineSnapshot(`
-      SwapiSpecies {
+      Species {
         "id": 15,
         "name": "Wookie",
       }

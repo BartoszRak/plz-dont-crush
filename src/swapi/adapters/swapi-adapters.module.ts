@@ -1,14 +1,14 @@
 import { HttpModule, Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
-import { CharacterRepository } from '../ports/character-repository'
-import { SpeciesRepository } from '../ports/species-repository'
-import { VehiclesRepository } from '../ports/vehicles-repository'
+import { CharacterRepositoryPort } from '../ports/character-repository.port'
+import { SpeciesRepositoryPort } from '../ports/species-repository.port'
+import { VehiclesRepositoryPort } from '../ports/vehicles-repository.port'
 import { DataTransformerService } from './data-transformer.service'
 import { HttpApiHelper } from './http-api-helper.service'
-import { SwapiVehiclesRepository } from './repositories/swapi-vehicles-repository'
-import { SwapiCharacterRepository } from './repositories/swapi-character-repository'
-import { SwapiSpeciesRepository } from './repositories/swapi-species-repository'
+import { VehiclesRepositoryAdapter } from './repositories/vehicles-repository.adapter'
+import { CharacterRepositoryAdapter } from './repositories/character-repository.adapter'
+import { SpeciesRepositoryAdapter } from './repositories/species-repository.adapter'
 import { swapiConfig } from './swapi.config'
 
 @Module({
@@ -17,18 +17,18 @@ import { swapiConfig } from './swapi.config'
     HttpApiHelper,
     DataTransformerService,
     {
-      provide: CharacterRepository,
-      useClass: SwapiCharacterRepository,
+      provide: CharacterRepositoryPort,
+      useClass: CharacterRepositoryAdapter,
     },
     {
-      provide: SpeciesRepository,
-      useClass: SwapiSpeciesRepository,
+      provide: SpeciesRepositoryPort,
+      useClass: SpeciesRepositoryAdapter,
     },
     {
-      provide: VehiclesRepository,
-      useClass: SwapiVehiclesRepository,
+      provide: VehiclesRepositoryPort,
+      useClass: VehiclesRepositoryAdapter,
     },
   ],
-  exports: [CharacterRepository, SpeciesRepository, VehiclesRepository],
+  exports: [CharacterRepositoryPort, SpeciesRepositoryPort, VehiclesRepositoryPort],
 })
 export class SwapiAdaptersModule {}

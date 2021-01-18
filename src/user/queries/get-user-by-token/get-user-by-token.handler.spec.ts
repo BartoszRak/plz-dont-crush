@@ -14,18 +14,18 @@ import { GetUserByTokenHandler } from './get-user-by-token.handler'
 import { GetUserByToken } from './get-user-by-token.query'
 import {
   CharactersManager,
-  SwapiCharacter,
-  SwapiCharacterId,
-  SwapiSpeciesId,
+  Character,
+  CharacterId,
+  SpeciesId,
 } from '@main/swapi'
 import {
-  SwapiCharacterFilmsIds,
-  SwapiCharacterName,
-  SwapiCharacterPlanetId,
-  SwapiCharacterSpeciesIds,
-  SwapiCharacterStarshipsIds,
-  SwapiCharacterVehiclesIds,
-} from '@main/swapi/domain/character/swapi-character-values'
+  CharacterFilmsIds,
+  CharacterName,
+  CharacterPlanetId,
+  CharacterSpeciesIds,
+  CharacterStarshipsIds,
+  CharacterVehiclesIds,
+} from '@main/swapi/domain/character/character-values'
 
 let handler: GetUserByTokenHandler
 let userRepositoryMock: jest.Mocked<Repository<UserEntity>>
@@ -38,14 +38,14 @@ beforeEach(async () => {
   charactersManagerMock.getCharacterById = jest
     .fn()
     .mockReturnValue(
-      new SwapiCharacter(
-        new SwapiCharacterId(13),
-        new SwapiCharacterName('John James'),
-        new SwapiCharacterFilmsIds([14, 52]),
-        new SwapiCharacterSpeciesIds([new SwapiSpeciesId(2)]),
-        new SwapiCharacterVehiclesIds([]),
-        new SwapiCharacterStarshipsIds([3, 2, 63, 12]),
-        new SwapiCharacterPlanetId(55),
+      new Character(
+        new CharacterId(13),
+        new CharacterName('John James'),
+        new CharacterFilmsIds([14, 52]),
+        new CharacterSpeciesIds([new SpeciesId(2)]),
+        new CharacterVehiclesIds([]),
+        new CharacterStarshipsIds([3, 2, 63, 12]),
+        new CharacterPlanetId(55),
       ),
     )
 
@@ -134,7 +134,7 @@ describe('when getting user', () => {
           "email": "user@email.com",
           "id": "mockedId",
           "passwordHash": "mockedPasswordHash",
-          "swapiCharacter": SwapiCharacter {
+          "swapiCharacter": Character {
             "filmsIds": Array [
               14,
               52,

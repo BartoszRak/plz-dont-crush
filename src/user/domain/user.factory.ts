@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
 import { PasswordHash } from '@main/shared'
-import { CharactersManager, SwapiCharacterId } from '@main/swapi'
+import { CharactersManager, CharacterId } from '@main/swapi'
 
 import { User } from './user'
 import { UserEmail, UserId } from './user-values'
@@ -19,7 +19,7 @@ export class UserFactory {
   constructor(private readonly charactersManager: CharactersManager) {}
 
   async create({ id, email, swapiCharacterId, passwordHash }: Input): Promise<User> {
-    const swapiCharacter = await this.charactersManager.getCharacterById(new SwapiCharacterId(swapiCharacterId))
+    const swapiCharacter = await this.charactersManager.getCharacterById(new CharacterId(swapiCharacterId))
     if(!isDefined(swapiCharacter)) {
       throw new Error('Unexpect error: User has got assigned SWAPI character that has not been found.')
     }

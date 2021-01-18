@@ -2,27 +2,27 @@ import { Injectable } from '@nestjs/common'
 
 import { isDefined } from '@main/utils'
 
-import { SwapiCharacterId } from '../domain/character/swapi-character-values'
-import { CharacterRepository } from '../ports/character-repository'
+import { CharacterId } from '../domain/character/character-values'
+import { CharacterRepositoryPort } from '../ports/character-repository.port'
 import { CharactersManager as CharactersManagerContract } from '../contract/characters-manager'
-import { SwapiCharacter } from '../domain/character/swapi-character'
-import { SwapiCharacterFactory } from '../domain/character/swapi-character.factory'
+import { Character } from '../domain/character/character'
+import { CharacterFactory } from '../domain/character/character.factory'
 
 @Injectable()
 export class CharactersManager implements CharactersManagerContract {
   constructor(
-    private readonly swapiRepository: CharacterRepository,
-    private readonly swapiCharacterFactory: SwapiCharacterFactory,
+    private readonly swapiRepository: CharacterRepositoryPort,
+    private readonly swapiCharacterFactory: CharacterFactory,
   ) {}
 
-  async getRandomCharacterId(): Promise<SwapiCharacterId> {
+  async getRandomCharacterId(): Promise<CharacterId> {
     const character = await this.swapiRepository.getRandomCharacter()
-    return new SwapiCharacterId(character.id)
+    return new CharacterId(character.id)
   }
 
   async getCharacterById(
-    id: SwapiCharacterId,
-  ): Promise<SwapiCharacter | undefined> {
+    id: CharacterId,
+  ): Promise<Character | undefined> {
     const character = await this.swapiRepository.getCharacter(id.value)
     return isDefined(character)
       ? this.swapiCharacterFactory.create(character)

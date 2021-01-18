@@ -7,21 +7,21 @@ export { SpeciesManager } from './contract/species-manager'
 export { VehiclesManager } from './contract/vehicles-manager'
 
 export {
-  SwapiCharacterId,
-  SwapiCharacterFilmsIds,
-  SwapiCharacterPlanetId,
-  SwapiCharacterName,
-  SwapiCharacterSpeciesIds,
-  SwapiCharacterStarshipsIds,
-  SwapiCharacterVehiclesIds,
-} from './domain/character/swapi-character-values'
-export { SwapiCharacter } from './domain/character/swapi-character'
+  CharacterId,
+  CharacterFilmsIds,
+  CharacterPlanetId,
+  CharacterName,
+  CharacterSpeciesIds,
+  CharacterStarshipsIds,
+  CharacterVehiclesIds,
+} from './domain/character/character-values'
+export { Character } from './domain/character/character'
 
 export {
-  SwapiSpeciesId,
-  SwapiSpeciesName,
-} from './domain/species/swapi-species-values'
-export { SwapiSpecies } from './domain/species/swapi-species'
+  SpeciesId,
+  SpeciesName,
+} from './domain/species/species-values'
+export { Species } from './domain/species/species'
 
 export {
   VehicleId,

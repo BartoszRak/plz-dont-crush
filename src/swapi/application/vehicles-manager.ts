@@ -4,14 +4,14 @@ import { isDefined } from '@main/utils'
 
 import { VehiclesManager as VehiclesManagerContract } from '../contract/vehicles-manager'
 import { VehicleFactory } from '../domain/vehicle/vehicle.factory'
-import { VehiclesRepository } from '../ports/vehicles-repository'
+import { VehiclesRepositoryPort } from '../ports/vehicles-repository.port'
 import { VehicleId } from '../domain/vehicle/vehicle-values'
 import { Vehicle } from '../domain/vehicle/vehicle'
 
 @Injectable()
 export class VehiclesManager implements VehiclesManagerContract {
   constructor(
-    private readonly vehiclesRepository: VehiclesRepository,
+    private readonly vehiclesRepository: VehiclesRepositoryPort,
     private readonly vehicleFactory: VehicleFactory,
   ) {}
 

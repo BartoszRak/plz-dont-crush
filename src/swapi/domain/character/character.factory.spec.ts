@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing'
-import { SwapiCharacterFactory } from './swapi-character.factory'
+import { CharacterFactory } from './character.factory'
 
-let factory: SwapiCharacterFactory
+let factory: CharacterFactory
 let result: unknown
 
 beforeEach(async () => {
   const mockedModule = await Test.createTestingModule({
-    providers: [SwapiCharacterFactory],
+    providers: [CharacterFactory],
   }).compile()
 
-  factory = mockedModule.get(SwapiCharacterFactory)
+  factory = mockedModule.get(CharacterFactory)
 })
 
 describe('create()', () => {
@@ -27,7 +27,7 @@ describe('create()', () => {
 
   it('returns created swapi character', () => {
     expect(result).toMatchInlineSnapshot(`
-      SwapiCharacter {
+      Character {
         "filmsIds": Array [],
         "id": 98,
         "name": "George Patton",

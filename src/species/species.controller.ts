@@ -11,10 +11,10 @@ import {
 
 import { Protect } from '@main/auth'
 import { AuthorizedRequest } from '@main/shared'
-import { SpeciesManager, SwapiSpeciesId } from '@main/swapi'
+import { SpeciesManager, SpeciesId } from '@main/swapi'
 import { isDefined } from '@main/utils'
 
-import { SwapiSpeciesDto } from '@main/swapi/dto/swapi-species.dto'
+import { SpeciesDto } from '@main/swapi/dto/swapi-species.dto'
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { ApiTag } from '@main/swagger/setup-swagger'
 import { UserSpecificCacheInterceptor } from '@main/cache'
@@ -31,7 +31,7 @@ export class SpeciesController {
   @ApiResponse({
     status: 200,
     description: 'Gets a species with specified ID.',
-    type: SwapiSpeciesDto,
+    type: SpeciesDto,
   })
   @UseInterceptors(CacheInterceptor)
   @Protect()
@@ -39,12 +39,12 @@ export class SpeciesController {
   async getSingleSpecies(
     @Req() { user }: AuthorizedRequest,
     @Param('id') id: number,
-  ): Promise<SwapiSpeciesDto> {
+  ): Promise<SpeciesDto> {
     if (!user.hasPermissionsToSpecies(id)) {
       throw new ForbiddenException('Missing permissions.')
     }
     const species = await this.speciesManager.getSpeciesById(
-      new SwapiSpeciesId(id),
+      new SpeciesId(id),
     )
     if (!isDefined(species)) {
       throw new NotFoundException(
@@ -57,7 +57,7 @@ export class SpeciesController {
   @ApiResponse({
     status: 200,
     description: `Gets all species assigned to user's character.`,
-    type: SwapiSpeciesDto,
+    type: SpeciesDto,
     isArray: true,
   })
   @UseInterceptors(UserSpecificCacheInterceptor)
@@ -65,7 +65,7 @@ export class SpeciesController {
   @Get()
   async getMySpecies(
     @Req() { user }: AuthorizedRequest,
-  ): Promise<SwapiSpeciesDto[]> {
+  ): Promise<SpeciesDto[]> {
     const species = await this.speciesManager.getMultipleSpeciesByIds(
       user.getAssignedCharacterSpeciesIds(),
     )

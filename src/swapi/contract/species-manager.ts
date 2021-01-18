@@ -1,8 +1,8 @@
-import { SwapiSpecies } from "../domain/species/swapi-species";
-import { SwapiSpeciesId } from "../domain/species/swapi-species-values";
+import { Species } from "../domain/species/species";
+import { SpeciesId } from "../domain/species/species-values";
 
 export abstract class SpeciesManager {
-  abstract getSpeciesById(id: SwapiSpeciesId): Promise<SwapiSpecies | undefined>
+  abstract getSpeciesById(id: SpeciesId): Promise<Species | undefined>
 
-  abstract getMultipleSpeciesByIds(ids: SwapiSpeciesId[]): Promise<SwapiSpecies[]>
+  abstract getMultipleSpeciesByIds(ids: SpeciesId[]): Promise<Species[]>
 }

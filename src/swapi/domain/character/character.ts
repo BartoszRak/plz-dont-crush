@@ -1,28 +1,28 @@
 import { plainToClass } from 'class-transformer'
 
-import { SwapiCharacterId } from '@main/swapi'
+import { CharacterId } from '@main/swapi'
 
 import { CharacterDto } from '../../dto/swapi-character.dto'
 import {
-  SwapiCharacterFilmsIds,
-  SwapiCharacterPlanetId,
-  SwapiCharacterName,
-  SwapiCharacterSpeciesIds,
-  SwapiCharacterStarshipsIds,
-  SwapiCharacterVehiclesIds,
-} from './swapi-character-values'
-import { SwapiSpeciesId } from '../species/swapi-species-values'
+  CharacterFilmsIds,
+  CharacterPlanetId,
+  CharacterName,
+  CharacterSpeciesIds,
+  CharacterStarshipsIds,
+  CharacterVehiclesIds,
+} from './character-values'
+import { SpeciesId } from '../species/species-values'
 import { VehicleId } from '../vehicle/vehicle-values'
 
-export class SwapiCharacter {
+export class Character {
   constructor(
-    readonly id: SwapiCharacterId,
-    readonly name: SwapiCharacterName,
-    readonly filmsIds: SwapiCharacterFilmsIds,
-    readonly speciesIds: SwapiCharacterSpeciesIds,
-    readonly vehiclesIds: SwapiCharacterVehiclesIds,
-    readonly starshipsIds: SwapiCharacterStarshipsIds,
-    readonly planetId: SwapiCharacterPlanetId,
+    readonly id: CharacterId,
+    readonly name: CharacterName,
+    readonly filmsIds: CharacterFilmsIds,
+    readonly speciesIds: CharacterSpeciesIds,
+    readonly vehiclesIds: CharacterVehiclesIds,
+    readonly starshipsIds: CharacterStarshipsIds,
+    readonly planetId: CharacterPlanetId,
   ) {}
 
   isSpecies(speciesId: number): boolean {
@@ -32,7 +32,7 @@ export class SwapiCharacter {
     return this.vehiclesIds.value.map(({ value }) => value).includes(vehicleId)
   }
 
-  getAssignedSpecies(): SwapiSpeciesId[] {
+  getAssignedSpecies(): SpeciesId[] {
     return this.speciesIds.value
   }
 

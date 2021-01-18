@@ -1,7 +1,7 @@
 import { HttpService, Inject, Injectable } from '@nestjs/common'
 
 import { Vehicle, VehicleWithIds } from '@main/swapi/ports/vehicle'
-import { VehiclesRepository } from '@main/swapi/ports/vehicles-repository'
+import { VehiclesRepositoryPort } from '@main/swapi/ports/vehicles-repository.port'
 import { isDefined } from '@main/utils'
 
 import { DataTransformerService } from '../data-transformer.service'
@@ -9,7 +9,7 @@ import { HttpApiHelper } from '../http-api-helper.service'
 import { swapiConfig, SwapiConfig } from '../swapi.config'
 
 @Injectable()
-export class SwapiVehiclesRepository implements VehiclesRepository {
+export class VehiclesRepositoryAdapter implements VehiclesRepositoryPort {
   constructor(
     @Inject(swapiConfig.KEY) private readonly config: SwapiConfig,
     private readonly httpService: HttpService,

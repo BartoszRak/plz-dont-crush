@@ -1,5 +1,5 @@
 import { PasswordHash } from '@main/shared'
-import { SwapiCharacter, SwapiSpeciesId, VehicleId } from '@main/swapi'
+import { Character, SpeciesId, VehicleId } from '@main/swapi'
 
 import { plainToClass } from 'class-transformer'
 import { UserDto } from '../dto/user.dto'
@@ -9,7 +9,7 @@ export class User {
   constructor(
     readonly id: UserId,
     readonly email: UserEmail,
-    readonly swapiCharacter: SwapiCharacter,
+    readonly swapiCharacter: Character,
     readonly passwordHash: PasswordHash,
   ) {}
 
@@ -21,7 +21,7 @@ export class User {
     return this.swapiCharacter.hasVehicle(vehicleId)
   }
 
-  getAssignedCharacterSpeciesIds(): SwapiSpeciesId[] {
+  getAssignedCharacterSpeciesIds(): SpeciesId[] {
     return this.swapiCharacter.getAssignedSpecies()
   }
 
