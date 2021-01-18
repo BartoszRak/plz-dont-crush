@@ -56,7 +56,7 @@ export class SpeciesController {
 
   @ApiResponse({
     status: 200,
-    description: 'Gets a multiple species with specified ID.',
+    description: `Gets all species assigned to user's character.`,
     type: SwapiSpeciesDto,
     isArray: true,
   })

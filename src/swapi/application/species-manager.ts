@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common'
 import { isDefined } from '@main/utils'
 
 import { SpeciesManager as SpeciesManagerContract } from '../contract/species-manager'
-import { SwapiSpecies } from '../domain/swapi-species'
-import { SwapiSpeciesId } from '../domain/swapi-species-values'
-import { SwapiSpeciesFactory } from '../domain/swapi-species.factory'
+import { SwapiSpecies } from '../domain/species/swapi-species'
+import { SwapiSpeciesId } from '../domain/species/swapi-species-values'
+import { SwapiSpeciesFactory } from '../domain/species/swapi-species.factory'
 import { SpeciesRepository } from '../ports/species-repository'
 
 @Injectable()

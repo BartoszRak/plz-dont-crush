@@ -1,5 +1,5 @@
-import { SwapiCharacter } from '../domain/swapi-character'
-import { SwapiCharacterId } from '../domain/swapi-character-values'
+import { SwapiCharacter } from '../domain/character/swapi-character'
+import { SwapiCharacterId } from '../domain/character/swapi-character-values'
 
 export abstract class CharactersManager {
   abstract getRandomCharacterId(): Promise<SwapiCharacterId>

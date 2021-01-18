@@ -2,6 +2,7 @@ import {
   CharactersManager,
   SwapiCharacter,
   SwapiCharacterId,
+  SwapiSpeciesId,
 } from '@main/swapi'
 import {
   SwapiCharacterFilmsIds,
@@ -10,7 +11,7 @@ import {
   SwapiCharacterSpeciesIds,
   SwapiCharacterStarshipsIds,
   SwapiCharacterVehiclesIds,
-} from '@main/swapi/domain/swapi-character-values'
+} from '@main/swapi/domain/character/swapi-character-values'
 import { Test } from '@nestjs/testing'
 import { UserFactory } from './user.factory'
 
@@ -27,8 +28,8 @@ beforeEach(async () => {
         new SwapiCharacterId(13),
         new SwapiCharacterName('John James'),
         new SwapiCharacterFilmsIds([14, 52]),
-        new SwapiCharacterSpeciesIds([2]),
-        new SwapiCharacterVehiclesIds([]),
+        new SwapiCharacterSpeciesIds([]),
+        new SwapiCharacterVehiclesIds([new SwapiSpeciesId(2)]),
         new SwapiCharacterStarshipsIds([3, 2, 63, 12]),
         new SwapiCharacterPlanetId(55),
       ),
@@ -71,16 +72,16 @@ describe('create()', () => {
           "id": 13,
           "name": "John James",
           "planetId": 55,
-          "speciesIds": Array [
-            2,
-          ],
+          "speciesIds": Array [],
           "starshipsIds": Array [
             3,
             2,
             63,
             12,
           ],
-          "vehiclesIds": Array [],
+          "vehiclesIds": Array [
+            2,
+          ],
         },
       }
     `)

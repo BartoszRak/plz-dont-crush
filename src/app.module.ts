@@ -14,6 +14,7 @@ import { SpeciesModule } from './species'
 import { SwapiModule } from './swapi'
 import { TokenModule } from './token'
 import { UserModule } from './user/user.module'
+import { VehiclesModule } from './vehicles'
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module'
     SwapiModule,
     CacheModule,
     SpeciesModule,
+    VehiclesModule,
   ],
   controllers: [HealthController],
   providers: [AppService],

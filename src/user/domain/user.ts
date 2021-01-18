@@ -1,5 +1,5 @@
 import { PasswordHash } from '@main/shared'
-import { SwapiCharacter, SwapiSpeciesId } from '@main/swapi'
+import { SwapiCharacter, SwapiSpeciesId, VehicleId } from '@main/swapi'
 
 import { plainToClass } from 'class-transformer'
 import { UserDto } from '../dto/user.dto'
@@ -17,8 +17,16 @@ export class User {
     return this.swapiCharacter.isSpecies(speciesId)
   }
 
+  hasPermissionsToVehicle(vehicleId: number): boolean {
+    return this.swapiCharacter.hasVehicle(vehicleId)
+  }
+
   getAssignedCharacterSpeciesIds(): SwapiSpeciesId[] {
     return this.swapiCharacter.getAssignedSpecies()
+  }
+
+  getAssignedCharacterVehiclesIds(): VehicleId[] {
+    return this.swapiCharacter.getAssignedVehicles()
   }
 
   toDto(): UserDto {

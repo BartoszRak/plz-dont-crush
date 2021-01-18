@@ -3,10 +3,12 @@ import { ConfigModule } from '@nestjs/config'
 
 import { CharacterRepository } from '../ports/character-repository'
 import { SpeciesRepository } from '../ports/species-repository'
+import { VehiclesRepository } from '../ports/vehicles-repository'
 import { DataTransformerService } from './data-transformer.service'
 import { HttpApiHelper } from './http-api-helper.service'
-import { SwapiCharacterRepository } from './swapi-character-repository'
-import { SwapiSpeciesRepository } from './swapi-species-repository'
+import { SwapiVehiclesRepository } from './repositories/swapi-vehicles-repository'
+import { SwapiCharacterRepository } from './repositories/swapi-character-repository'
+import { SwapiSpeciesRepository } from './repositories/swapi-species-repository'
 import { swapiConfig } from './swapi.config'
 
 @Module({
@@ -22,7 +24,11 @@ import { swapiConfig } from './swapi.config'
       provide: SpeciesRepository,
       useClass: SwapiSpeciesRepository,
     },
+    {
+      provide: VehiclesRepository,
+      useClass: SwapiVehiclesRepository,
+    },
   ],
-  exports: [CharacterRepository, SpeciesRepository],
+  exports: [CharacterRepository, SpeciesRepository, VehiclesRepository],
 })
 export class SwapiAdaptersModule {}

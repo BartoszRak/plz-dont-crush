@@ -2,11 +2,11 @@ import { HttpService, Inject, Injectable } from '@nestjs/common'
 
 import { isDefined } from '@main/utils'
 
-import { DataTransformerService } from './data-transformer.service'
-import { SwapiConfig, swapiConfig } from './swapi.config'
-import { SpeciesRepository } from '../ports/species-repository'
-import { Species, SpeciesWithIds } from '../ports/species'
-import { HttpApiHelper } from './http-api-helper.service'
+import { DataTransformerService } from '../data-transformer.service'
+import { SwapiConfig, swapiConfig } from '../swapi.config'
+import { SpeciesRepository } from '../../ports/species-repository'
+import { Species, SpeciesWithIds } from '../../ports/species'
+import { HttpApiHelper } from '../http-api-helper.service'
 
 @Injectable()
 export class SwapiSpeciesRepository implements SpeciesRepository {

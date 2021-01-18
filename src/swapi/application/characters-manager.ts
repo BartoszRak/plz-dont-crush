@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common'
 
 import { isDefined } from '@main/utils'
 
-import { SwapiCharacterId } from '../domain/swapi-character-values'
+import { SwapiCharacterId } from '../domain/character/swapi-character-values'
 import { CharacterRepository } from '../ports/character-repository'
 import { CharactersManager as CharactersManagerContract } from '../contract/characters-manager'
-import { SwapiCharacter } from '../domain/swapi-character'
-import { SwapiCharacterFactory } from '../domain/swapi-character.factory'
+import { SwapiCharacter } from '../domain/character/swapi-character'
+import { SwapiCharacterFactory } from '../domain/character/swapi-character.factory'
 
 @Injectable()
 export class CharactersManager implements CharactersManagerContract {

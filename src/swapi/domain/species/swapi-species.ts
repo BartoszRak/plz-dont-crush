@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer'
-import { SwapiSpeciesDto } from '../dto/swapi-species.dto'
+import { SwapiSpeciesDto } from '../../dto/swapi-species.dto'
 
 import { SwapiSpeciesId, SwapiSpeciesName } from './swapi-species-values'
 

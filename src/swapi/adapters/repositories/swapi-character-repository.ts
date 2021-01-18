@@ -2,12 +2,12 @@ import { HttpService, Inject, Injectable } from '@nestjs/common'
 
 import { getRandomInt, isDefined } from '@main/utils'
 
-import { Character, CharacterWithIds } from '../ports/character'
-import { CharacterRepository } from '../ports/character-repository'
-import { DataTransformerService } from './data-transformer.service'
-import { SwapiPaginatedResponse } from './swapi-paginated-response.type'
-import { SwapiConfig, swapiConfig } from './swapi.config'
-import { HttpApiHelper } from './http-api-helper.service'
+import { Character, CharacterWithIds } from '../../ports/character'
+import { CharacterRepository } from '../../ports/character-repository'
+import { DataTransformerService } from '../data-transformer.service'
+import { SwapiPaginatedResponse } from '../../ports/swapi-paginated-response.type'
+import { SwapiConfig, swapiConfig } from '../swapi.config'
+import { HttpApiHelper } from '../http-api-helper.service'
 
 @Injectable()
 export class SwapiCharacterRepository implements CharacterRepository {
