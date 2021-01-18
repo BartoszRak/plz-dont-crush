@@ -1,17 +1,33 @@
 import { SignUpDto } from '@main/auth/dto/sign-up.dto'
 import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
+import { bootstrapSwapi } from './third-party'
 import { init } from './utils/init'
+import * as dotenv from 'dotenv'
+import { ThirdPartyPort } from './third-party/third-party-port'
 
 const signUpPath = '/auth/sign-up'
 const signInPath = '/auth/sign-in'
 const protectedHealthPath = '/protected-health'
 
+dotenv.config()
+
+process.env.SWAPI_BASE_URL = `http://localhost:${ThirdPartyPort.Swapi}`
+
 describe('Auth (e2e)', () => {
   let app: INestApplication
+  let swapiApp: INestApplication
   let result: request.Response
 
-  init(({ application, done }) => {
+  beforeAll(async () => {
+    swapiApp = await bootstrapSwapi()
+  })
+
+  afterAll(async () => {
+    await swapiApp.close()
+  })
+
+  init(async ({ application, done }) => {
     app = application
     done()
   })
@@ -59,17 +75,6 @@ describe('Auth (e2e)', () => {
             token: {
               value: expect.any(String),
             },
-            user: {
-              swapiCharacter: {
-                id: expect.any(Number),
-                name: expect.any(String),
-                planetId: expect.any(Number),
-                filmsIds: expect.any(Array),
-                speciesIds: expect.any(Array),
-                vehiclesIds: expect.any(Array),
-                starshipsIds: expect.any(Array),
-              },
-            },
           },
           `
           Object {
@@ -81,12 +86,23 @@ describe('Auth (e2e)', () => {
               "email": "mocked@email.com",
               "swapiCharacter": Object {
                   "id": __ID__,
-                  "name": Any<String>,
-                  "planetId": Any<Number>,
-                  "filmsIds": Any<Array>,
-                  "speciesIds": Any<Array>,
-                  "vehiclesIds": Any<Array>,
-                  "starshipsIds": Any<Array>,
+                  "name": "Luke Skywalker",
+                  "planetId": 1,
+                  "filmsIds": Array [
+                      1,
+                      2,
+                      3,
+                      6,
+                    ],
+                  "speciesIds": Array [],
+                  "vehiclesIds": Array [
+                      14,
+                      30,
+                    ],
+                  "starshipsIds": Array [
+                      12,
+                      22,
+                    ],
               },
           },
           }
@@ -123,17 +139,6 @@ describe('Auth (e2e)', () => {
                 token: {
                   value: expect.any(String),
                 },
-                user: {
-                  swapiCharacter: {
-                    id: expect.any(Number),
-                    name: expect.any(String),
-                    planetId: expect.any(Number),
-                    filmsIds: expect.any(Array),
-                    speciesIds: expect.any(Array),
-                    vehiclesIds: expect.any(Array),
-                    starshipsIds: expect.any(Array),
-                  },
-                },
               },
               `
               Object {
@@ -145,12 +150,23 @@ describe('Auth (e2e)', () => {
                   "email": "mocked@email.com",
                   "swapiCharacter": Object {
                       "id": __ID__,
-                      "name": Any<String>,
-                      "planetId": Any<Number>,
-                      "filmsIds": Any<Array>,
-                      "speciesIds": Any<Array>,
-                      "vehiclesIds": Any<Array>,
-                      "starshipsIds": Any<Array>,
+                      "name": "Luke Skywalker",
+                      "planetId": 1,
+                      "filmsIds": Array [
+                          1,
+                          2,
+                          3,
+                          6,
+                        ],
+                      "speciesIds": Array [],
+                      "vehiclesIds": Array [
+                          14,
+                          30,
+                        ],
+                      "starshipsIds": Array [
+                          12,
+                          22,
+                        ],
                   },
               },
               }

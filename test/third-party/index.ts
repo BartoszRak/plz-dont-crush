@@ -1,0 +1,1 @@
+export { bootstrapSwapi } from './swapi/main'

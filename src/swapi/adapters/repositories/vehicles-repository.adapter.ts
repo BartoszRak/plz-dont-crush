@@ -21,7 +21,7 @@ export class VehiclesRepositoryAdapter implements VehiclesRepositoryPort {
     const response = await this.httpService
       .get<Vehicle>(`${this.config.baseUrl}/vehicles/${id}`)
       .toPromise()
-    this.httpApiHelper.assertRequest(response)
+    this.httpApiHelper.assertResponse(response)
     if (response.status === 404) {
       return undefined
     }

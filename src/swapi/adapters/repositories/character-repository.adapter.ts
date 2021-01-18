@@ -19,17 +19,13 @@ export class CharacterRepositoryAdapter implements CharacterRepositoryPort {
   ) {}
 
   async getRandomCharacter(): Promise<CharacterWithIds> {
-    const response = await this.httpService
-      .get<SwapiPaginatedResponse<Character[]>>(`${this.config.baseUrl}/people`)
-      .toPromise()
-    this.httpApiHelper.assertRequest(response)
-    const { count } = response.data
-    const randomCharacterId = getRandomInt(1, count + 1)
-    const character = await this.getCharacter(randomCharacterId)
-    if (!isDefined(character)) {
-      throw new Error('Unexpectedly random character not found.')
+    const characters = await this.httpApiHelper.fetchThroughtPages<Character>(`${this.config.baseUrl}/people`)
+    if (characters.length === 0) {
+      throw new Error('Unexpectedly no characters found at all.')
     }
-    return character
+    const extendedCharacters = characters.map((character) => this.dataTransformer.extendCharacter(character))
+    const randomCharacterIndex = getRandomInt(0, extendedCharacters.length - 1)
+    return extendedCharacters[randomCharacterIndex]
   }
 
   async getCharacter(id: number): Promise<CharacterWithIds | undefined> {

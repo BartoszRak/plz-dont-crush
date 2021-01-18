@@ -21,7 +21,7 @@ export class SpeciesRepositoryAdapter implements SpeciesRepositoryPort {
     const response = await this.httpService
       .get<Species>(`${this.config.baseUrl}/species/${id}`)
       .toPromise()
-    this.httpApiHelper.assertRequest(response)
+    this.httpApiHelper.assertResponse(response)
     if (response.status === 404) {
       return undefined
     }
