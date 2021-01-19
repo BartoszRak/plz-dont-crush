@@ -1,10 +1,9 @@
 import { SignUpDto } from '@main/auth/dto/sign-up.dto'
 import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
-import { bootstrapSwapi } from '../third-party'
-import { init } from '../utils/init'
+import { bootstrapSwapi, ThirdPartyPort } from './third-party'
+import { init } from './utils/init'
 import * as dotenv from 'dotenv'
-import { ThirdPartyPort } from '../third-party/third-party-port'
 
 const signUpPath = '/auth/sign-up'
 const signInPath = '/auth/sign-in'

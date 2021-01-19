@@ -3,8 +3,7 @@ import { SignUpDto } from '@main/auth/dto/sign-up.dto'
 import { INestApplication } from '@nestjs/common'
 import * as dotenv from 'dotenv'
 import * as request from 'supertest'
-import { bootstrapSwapi } from './third-party'
-import { ThirdPartyPort } from './third-party/third-party-port'
+import { bootstrapSwapi, ThirdPartyPort } from './third-party'
 import { init } from './utils/init'
 
 dotenv.config()
