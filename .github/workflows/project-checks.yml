@@ -101,8 +101,11 @@ jobs:
       - build
       - build-docker
     runs-on: ubuntu-18.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v2
+      - name: 'Build docker image'
+        run: docker build --tag plz-dont-crush .
       - uses: ./.github/actions/push-to-aws-ecr
         with:
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
@@ -112,7 +115,7 @@ jobs:
           local_image: plz-dont-crush
           local_tag: ${{ github.sha }}
           aws_image: plz-dont-crush-staging
-          aws_tag: ${{ github.sha }}
+          aws_tag: latest
   deploy-production:
     name: 'Deploy production'
     if: github.ref == 'refs/heads/production'
@@ -122,8 +125,11 @@ jobs:
       - build
       - build-docker
     runs-on: ubuntu-18.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v2
+      - name: 'Build docker image'
+        run: docker build --tag plz-dont-crush .
       - uses: ./.github/actions/push-to-aws-ecr
         with:
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
