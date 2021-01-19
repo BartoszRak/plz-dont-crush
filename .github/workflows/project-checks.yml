@@ -39,7 +39,7 @@ jobs:
         uses: codecov/codecov-action@v1.0.11
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-  runner-job:
+  e2e-tests:
     name: E2E Tests
     runs-on: ubuntu-18.04
     timeout-minutes: 15
