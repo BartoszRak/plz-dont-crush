@@ -92,3 +92,45 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Build docker image'
         run: docker build --tag plz-dont-crush:${{ github.sha }} .
+  deploy-staging:
+    name: 'Deploy staging'
+    if: github.ref == 'refs/heads/master'
+    needs:
+      - unit-tests
+      - e2e-tests
+      - build
+      - build-docker
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/push-to-aws-ecr
+        with:
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-central-1
+          local_image: plz-dont-crush
+          local_tag: ${{ github.sha }}
+          aws_image: plz-dont-crush-staging
+          aws_tag: ${{ github.sha }}
+  deploy-production:
+    name: 'Deploy production'
+    if: github.ref == 'refs/heads/production'
+    needs:
+      - unit-tests
+      - e2e-tests
+      - build
+      - build-docker
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/push-to-aws-ecr
+        with:
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-central-1
+          local_image: plz-dont-crush
+          local_tag: ${{ github.sha }}
+          aws_image: plz-dont-crush-production
+          aws_tag: ${{ github.sha }}

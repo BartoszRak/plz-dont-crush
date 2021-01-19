@@ -1,0 +1,52 @@
+name: Push docker image to AWS ECR
+inputs:
+  aws_access_key_id:
+    description: AWS_ACCESS_KEY_ID of an IAM user used in the action
+    required: true
+  aws_secret_access_key:
+    description: AWS_SECRET_ACCESS_KEY of an IAM user used in the action
+    required: true
+  aws_region:
+    description: AWS region
+    required: true
+  local_image:
+    description: Local image name
+    required: true
+  local_tag:
+    description: Local image tag
+    required: true
+  aws_image:
+    description: AWS image name
+    required: true
+  aws_tag:
+    description: AWS image tag
+    required: true
+  aws_account_id:
+    description: ID of AWS IAM account
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: 'Aws sign in'
+      shell: bash
+      env:
+        AWS_DEFAULT_REGION: ${{ inputs.aws_region }}
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
+      run: aws ecr get-login-password --region ${{ inputs.aws_region }} | docker login --username AWS --password-stdin ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_region }}.amazonaws.com
+    - name: 'Docker tag as local image'
+      run: docker tag ${{ inputs.local_image }} ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_region }}.amazonaws.com/${{ inputs.aws_image }}:${{ inputs.local_tag }}
+      shell: bash
+    - name: 'Docker push as local image'
+      run: docker push ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_region }}.amazonaws.com/${{ inputs.aws_image }}:${{ inputs.local_tag }}
+      shell: bash
+    - name: 'Docker tag as AWS-ready image'
+      run: docker tag ${{ inputs.local_image }} ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_region }}.amazonaws.com/${{ inputs.aws_image }}:${{ inputs.aws_tag }}
+      shell: bash
+    - name: 'Docker push as AWS-ready image'
+      run: docker push ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_region }}.amazonaws.com/${{ inputs.aws_image }}:${{ inputs.aws_tag }}
+      shell: bash
+      env:
+        AWS_DEFAULT_REGION: ${{ inputs.aws_region }}
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
