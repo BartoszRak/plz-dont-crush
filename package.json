@@ -25,7 +25,8 @@
     "migration:run": "ts-node --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run",
     "migration:run:prod": "typeorm migration:run -f ormconfig.prod.js",
     "migration:revert": "ts-node --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert",
-    "migration:new": "ts-node --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create -n"
+    "migration:revert:prod": "typeorm migration:revert -f ormconfig.prod.js",
+    "migration:create": "ts-node --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create -n"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
