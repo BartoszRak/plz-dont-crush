@@ -20,7 +20,7 @@ export class PeopleMockService {
         'http://swapi.dev/api/films/3/',
         'http://swapi.dev/api/films/6/',
       ],
-      species: [],
+      species: ['http://swapi.dev/api/films/6/','http://swapi.dev/api/films/7/',],
       vehicles: [
         'http://swapi.dev/api/vehicles/14/',
         'http://swapi.dev/api/vehicles/30/',

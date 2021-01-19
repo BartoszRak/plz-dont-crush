@@ -94,7 +94,10 @@ describe('Auth (e2e)', () => {
                       3,
                       6,
                     ],
-                  "speciesIds": Array [],
+                  "speciesIds": Array [
+                      6,
+                      7,
+                    ],
                   "vehiclesIds": Array [
                       14,
                       30,
@@ -158,7 +161,10 @@ describe('Auth (e2e)', () => {
                           3,
                           6,
                         ],
-                      "speciesIds": Array [],
+                      "speciesIds": Array [
+                          6,
+                          7,
+                        ],
                       "vehiclesIds": Array [
                           14,
                           30,

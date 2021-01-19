@@ -12,14 +12,14 @@ dotenv.config()
 process.env.SWAPI_BASE_URL = `http://localhost:${ThirdPartyPort.Swapi}`
 
 const signUpPath = '/auth/sign-up'
-const multipleVehiclesPath = '/vehicles'
-const getSingleVehiclePath = (id: number) => `/vehicles/${id}`
+const multipleSpeciesPath = '/species'
+const getSingleSpeciesPath = (id: number) => `/species/${id}`
 
 let app: INestApplication
 let swapiApp: INestApplication
 let result: request.Response
 
-describe('Vehicles (e2e)', () => {
+describe('Species (e2e)', () => {
   beforeAll(async () => {
     swapiApp = await bootstrapSwapi()
   })
@@ -92,13 +92,13 @@ describe('Vehicles (e2e)', () => {
       )
     })
 
-    describe('when attempting to get specific vehicle', () => {
-      describe(`when getting vehicle assigned to user's character`, () => {
+    describe('when attempting to get specific species', () => {
+      describe(`when getting species assigned to user's character`, () => {
         beforeEach(async () => {
           result = await request(app.getHttpServer())
             .get(
-              getSingleVehiclePath(
-                signUpResult.user.swapiCharacter.vehiclesIds[0],
+              getSingleSpeciesPath(
+                signUpResult.user.swapiCharacter.speciesIds[0],
               ),
             )
             .set('Authorization', `Bearer ${signUpResult.token.value}`)
@@ -109,17 +109,16 @@ describe('Vehicles (e2e)', () => {
             expect(result.body).toMatchInlineSnapshot(`
               Object {
                 "id": __ID__,
-                "name": "Sand Crawler14",
-                "model": "Digger Crawler",
+                "name": "Human6",
               }
             `)
         })
       })
 
-      describe(`when getting vehicle not assigned to user's character`, () => {
+      describe(`when getting species that are not assigned to user's character`, () => {
         beforeEach(async () => {
           result = await request(app.getHttpServer())
-            .get(getSingleVehiclePath(2341))
+            .get(getSingleSpeciesPath(2341))
             .set('Authorization', `Bearer ${signUpResult.token.value}`)
         })
 
@@ -129,7 +128,7 @@ describe('Vehicles (e2e)', () => {
             Object {
               "timestamp": __TIMESTAMP__,
               "statusCode": 403,
-              "path": "/vehicles/2341",
+              "path": "/species/2341",
               "errorType": "Forbidden",
               "message": "Missing permissions.",
               "errorFields": Array [],
@@ -139,10 +138,10 @@ describe('Vehicles (e2e)', () => {
       })
     })
 
-    describe(`when attempting to get user's all vehicles`, () => {
+    describe(`when attempting to get all user's species`, () => {
       beforeEach(async () => {
         result = await request(app.getHttpServer())
-          .get(multipleVehiclesPath)
+          .get(multipleSpeciesPath)
           .set('Authorization', `Bearer ${signUpResult.token.value}`)
       })
 
@@ -152,13 +151,11 @@ describe('Vehicles (e2e)', () => {
           Array [
             Object {
               "id": __ID__,
-              "name": "Sand Crawler14",
-              "model": "Digger Crawler",
+              "name": "Human6",
           },
             Object {
               "id": __ID__,
-              "name": "Sand Crawler30",
-              "model": "Digger Crawler",
+              "name": "Human7",
           },
           ]
         `)
@@ -167,9 +164,9 @@ describe('Vehicles (e2e)', () => {
   })
 
   describe('when not authorized', () => {
-    describe(`when attempting to get user's all vehicles`, () => {
+    describe(`when attempting to get user's all species`, () => {
       beforeEach(async () => {
-        result = await request(app.getHttpServer()).get(multipleVehiclesPath)
+        result = await request(app.getHttpServer()).get(multipleSpeciesPath)
       })
 
       it('retuns 401 response with a proper error', () => {
@@ -178,7 +175,7 @@ describe('Vehicles (e2e)', () => {
           Object {
             "timestamp": __TIMESTAMP__,
             "statusCode": 401,
-            "path": "/vehicles",
+            "path": "/species",
             "errorType": "Unauthorized",
             "message": "Unauthorized",
             "errorFields": Array [],
@@ -187,9 +184,9 @@ describe('Vehicles (e2e)', () => {
       })
     })
 
-    describe('when attempting to get single specific vehicle', () => {
+    describe('when attempting to get single specific species', () => {
       beforeEach(async () => {
-        result = await request(app.getHttpServer()).get(getSingleVehiclePath(1))
+        result = await request(app.getHttpServer()).get(getSingleSpeciesPath(1))
       })
 
       it('retuns 401 response with a proper error', () => {
@@ -198,7 +195,7 @@ describe('Vehicles (e2e)', () => {
           Object {
             "timestamp": __TIMESTAMP__,
             "statusCode": 401,
-            "path": "/vehicles/1",
+            "path": "/species/1",
             "errorType": "Unauthorized",
             "message": "Unauthorized",
             "errorFields": Array [],
