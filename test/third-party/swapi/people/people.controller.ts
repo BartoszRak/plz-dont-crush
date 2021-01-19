@@ -3,24 +3,29 @@ import { SwapiPaginatedResponse } from '@main/swapi/ports/swapi-paginated-respon
 import {
   Controller,
   Get,
+  Inject,
   NotFoundException,
   Param,
   ParseIntPipe,
 } from '@nestjs/common'
-import { PeopleMockService } from './people-mock.service'
+import { DataService } from '../data/data.service'
+import { CHARACTER_TOKEN } from './character.provider'
 
 @Controller('people')
 export class PeopleController {
-  constructor(private readonly peopleMockService: PeopleMockService) {}
-  private readonly characterId = 1
+  constructor(
+    @Inject(CHARACTER_TOKEN) private readonly character: Character,
+    private readonly dataService: DataService,
+  ) {}
+  
   @Get(':id')
   async getSingleCharacter(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Character> {
-    if (id !== this.characterId) {
+    if (id !== this.dataService.extractIdFromUrl(this.character.url)) {
       throw new NotFoundException()
     }
-    return this.peopleMockService.getCharacter(this.characterId)
+    return this.character
   }
 
   @Get()
@@ -29,7 +34,7 @@ export class PeopleController {
       count: 1,
       next: null,
       previous: null,
-      results: [this.peopleMockService.getCharacter(this.characterId)],
+      results: [this.character],
     }
   }
 }

@@ -1,10 +1,10 @@
 import { SignUpDto } from '@main/auth/dto/sign-up.dto'
 import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
-import { bootstrapSwapi } from './third-party'
-import { init } from './utils/init'
+import { bootstrapSwapi } from '../third-party'
+import { init } from '../utils/init'
 import * as dotenv from 'dotenv'
-import { ThirdPartyPort } from './third-party/third-party-port'
+import { ThirdPartyPort } from '../third-party/third-party-port'
 
 const signUpPath = '/auth/sign-up'
 const signInPath = '/auth/sign-in'
@@ -14,11 +14,11 @@ dotenv.config()
 
 process.env.SWAPI_BASE_URL = `http://localhost:${ThirdPartyPort.Swapi}`
 
-describe('Auth (e2e)', () => {
-  let app: INestApplication
-  let swapiApp: INestApplication
-  let result: request.Response
+let app: INestApplication
+let swapiApp: INestApplication
+let result: request.Response
 
+describe('Auth (e2e)', () => {
   beforeAll(async () => {
     swapiApp = await bootstrapSwapi()
   })
