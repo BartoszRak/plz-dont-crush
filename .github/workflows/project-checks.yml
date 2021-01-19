@@ -84,3 +84,11 @@ jobs:
           REDIS_HOST: localhost
           REDIS_ON: 0
           CACHE_TTL: 5
+  build-docker:
+    name: 'Build docker image'
+    runs-on: ubuntu-18.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Build docker image'
+        run: docker build --tag plz-dont-crush:${{ github.sha }} .
