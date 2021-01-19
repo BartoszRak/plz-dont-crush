@@ -8,14 +8,17 @@ import {
   Req,
   UseInterceptors,
 } from '@nestjs/common'
-import { ApiParam, ApiResponse } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { Protect } from '@main/auth'
 import { UserSpecificCacheInterceptor } from '@main/cache'
 import { AuthorizedRequest } from '@main/shared'
 import { VehicleDto, VehicleId, VehiclesManager } from '@main/swapi'
 import { isDefined } from '@main/utils'
+import { ApiTag } from '@main/swagger/setup-swagger'
 
+@ApiTags(ApiTag.Vehicles, ApiTag.Swapi)
+@ApiBearerAuth()
 @Controller('vehicles')
 export class VehiclesController {
   constructor(private readonly vehiclesManager: VehiclesManager) {}

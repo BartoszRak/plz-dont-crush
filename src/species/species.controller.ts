@@ -15,11 +15,12 @@ import { SpeciesManager, SpeciesId } from '@main/swapi'
 import { isDefined } from '@main/utils'
 
 import { SpeciesDto } from '@main/swapi/dto/swapi-species.dto'
-import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { ApiTag } from '@main/swagger/setup-swagger'
 import { UserSpecificCacheInterceptor } from '@main/cache'
 
-@ApiTags(ApiTag.Species)
+@ApiTags(ApiTag.Species, ApiTag.Swapi)
+@ApiBearerAuth()
 @Controller('species')
 export class SpeciesController {
   constructor(private readonly speciesManager: SpeciesManager) {}

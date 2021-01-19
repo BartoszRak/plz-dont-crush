@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 
 import { Protect } from './auth'
 import { ApiTag } from './swagger/setup-swagger'
@@ -12,6 +12,7 @@ export class HealthController {
     return 'Healthy!'
   }
 
+  @ApiBearerAuth()
   @Protect()
   @Get('/protected-health')
   protectedHealth(): string {
