@@ -10,7 +10,6 @@ import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { AuthFactory } from './domain/auth.factory'
 import { HttpStrategy } from './http.strategy'
-import { AttachUserInterceptor } from './attach-user.interceptor'
 
 const RegisteredPassportModule = PassportModule.register({
   defaultStrategy: 'bearer',
@@ -23,10 +22,6 @@ const RegisteredPassportModule = PassportModule.register({
     AuthService,
     AuthFactory,
     HttpStrategy,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: AttachUserInterceptor,
-    },
   ],
   exports: [RegisteredPassportModule],
 })
